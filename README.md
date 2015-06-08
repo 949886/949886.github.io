@@ -1,1 +1,1 @@
-# Blog based on HEXO.
+# Blog based on HEXO with theme TKL.
