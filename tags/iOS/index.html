@@ -17,7 +17,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hexo</title>
+    <title>Tag: iOS | Hexo</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
@@ -81,7 +81,7 @@
         
     $(function() {
         // page-id...
-        var pageId = "index.html";
+        var pageId = "tags/iOS/index.html";
         pageId = pageId.substr(0, pageId.indexOf("/"));
         if(pageId === "") pageId = "index";
         
@@ -90,34 +90,46 @@
     </script>
 
     
-<article class="post container">
-    <div class="jumbotron">
-        <h1><a href="/2016/08/05/iOS多线程编程/" title="iOS 多线程编程">iOS 多线程编程</a></h1>
-
+<div class="container archive-body">
+    <div class="row">
+        <div class="col-xs-3 well">
+            <div class="archive-title" >
+                <h2 class="tag-icon">iOS</h2>
+                <div>
+                    <a href="/tags"><< 返回标签列表</a> 
+                </div>
+            </div>
+        </div>
         
-            <p>线程线程的状态一个有生命的线程具有「创建」「就绪」「运行」「阻塞」「死亡」共五种状态。
+        <div class="col-xs-9" id="tag-list-body">
+            
+            <article class="post">
+                <div class="jumbotron">
+                    <h1><a href="/2016/08/05/iOS多线程编程/" title="iOS 多线程编程">iOS 多线程编程</a></h1>
+
+                    
+                        <p>线程线程的状态一个有生命的线程具有「创建」「就绪」「运行」「阻塞」「死亡」共五种状态。
 NSThreadNSThread为Objective-C提供了显示的创建和管理线程的API，其是对底层POSIX 线程C语言API的面向对象封装。
 线程操作
-获取线程+(NSThread *)mainThread;       //获取主线程+(NSThread *)currentThread;    //获取当前线程
-创建新线程-(id)initWithTarget:(id)target selector:</p>
-        
+获取线程+(NSThread *)</p>
+                    
 
-        <p class="say-title">
-            —— <img src="/images/avatar.png" class="img-circle index-post-avatar" />
-            <a href="http://yoursite.com" target="_blank" title="John Doe">John Doe</a>
-            in 2016-08-05 Tags: <a class="article-tag-link" href="/tags/iOS/">iOS</a> 
-        </p>
+                    <p class="say-title">
+                        —— <img src="/images/avatar.png" class="img-circle index-post-avatar" />
+                        <a href="http://yoursite.com" target="_blank" title="John Doe">John Doe</a>
+                        于2016-08-05自豪地以 <a class="article-tag-link" href="/tags/iOS/">iOS</a> 唠嗑
+                    </p>
+                </div>
+            </article>
+            
+            
+            
+        </div>
     </div>
-</article>
-
-
-
-
-<script>
-$(function() {
-    $("article:first").addClass("first-post");
-});
-</script>
+        
+    <div class="col-xs-19 all-list-box">
+    </div>
+</div>
     <footer id="footer">
     <div id="bottom-tip">
         Hexo
