@@ -1,10 +1,4 @@
 @font-face {
-  font-family: 'Vollkorn';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Vollkorn Regular'), local('Vollkorn-Regular'), url("http://themes.googleusercontent.com/static/fonts/vollkorn/v4/BCFBp4rt5gxxFrX6F12DKvesZW2xOQ-xsNqO47m55DA.woff") format('woff');
-}
-@font-face {
   font-family: 'JosefinSansRegular';
   src: url("font/josefinsans-regular-webfont.eot");
   src: url("font/josefinsans-regular-webfont.eot?#iefix") format('embedded-opentype'), url("font/josefinsans-regular-webfont.woff") format('woff'), url("font/josefinsans-regular-webfont.ttf") format('truetype'), url("font/josefinsans-regular-webfont.svg#JosefinSansRegular") format('svg');
@@ -239,7 +233,7 @@ nav {
 }
 .post {
   opacity: 0.9;
-  font-family: 'Adobe song Std', 'JosefinSansRegular', 'Vollkorn', Georgia, "Times New Roman", Times, "Kai", "Kaiti SC", "KaiTi", "BiauKai", "楷体", "楷体_GB2312", serif;
+  font-family: 'Adobe song Std', 'JosefinSansRegular', Georgia, "Times New Roman", Times, "Kai", "Kaiti SC", "KaiTi", "BiauKai", "楷体", "楷体_GB2312", serif;
 }
 .post h1 {
   font-weight: bold;
