@@ -1,0 +1,625 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    
+    <meta name="author" content="LunarEclipse">
+    
+    <meta name="description" content="Foundation 框架备忘录 . . .
+
+字符串NSString
+字符替换   
+
+范围替换
+
+-(NSString  *)stringByReplacingCharactersInRange:(NSRange)range withString:(NSString  *)replacement">
+    
+    
+
+    
+    <link rel="alternative" href="YOUR_RSS_ADDRESS" title="月蝕" type="application/atom+xml">
+    
+    
+    
+
+    <meta name="google-site-verification" content="pnnjQOYZnRMCjeXwEqAJRr0LSimDtbfHuX76xkNpoyk" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cocoa框架 | 月蝕</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Javascript -->
+    <script src="/js/jquery-2.1.0.min.js"></script>
+    <script src="/js/jquery.backstretch.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/headroom.min.js"></script>
+    <script src="/js/jquery.headroom.min.js"></script> 
+    <script src="/js/common.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://949886.github.io" title="月蝕">月蝕</a>
+            </div>
+
+            <div role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+                
+
+                <ul class="nav navbar-nav">
+                    
+                    <li id="nav-index"><a href="/">Home</a></li>
+                    
+                    <li id="nav-archives"><a href="/archives">Archives</a></li>
+                    
+                    <li id="nav-tags"><a href="/tags">Tags</a></li>
+                    
+                    <li id="nav-categories"><a href="/categories">Categories</a></li>
+                    
+                    <li id="nav-curriculumvitae"><a href="/curriculumvitae">About</a></li>
+                    
+                    <li id="nav-links"><a href="/links">Links</a></li>
+                    
+                    
+                    <li><a href="https://github.com/949886" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <script>
+    var backRoot = "/images/background/";
+    var backArray = [ "1.jpg", "2.jpg", "3.jpg", "4.jpg",  ];
+        
+    $(function() {
+        // page-id...
+        var pageId = "2016/05/30/Cocoa框架/";
+        pageId = pageId.substr(0, pageId.indexOf("/"));
+        if(pageId === "") pageId = "index";
+        
+        $("#nav-" + pageId).addClass("active");
+    });
+    </script>
+
+    <article class="post container">
+    <div class="well post-body first-post last-post">
+        <h1>Cocoa框架</h1>
+        
+        <div class="time-info">
+发表于:<time datetime="2016-05-30T15:31:32.000Z" itemprop="datePublished">2016-05-30</time>，更新于:<time datetime="2016-11-01T06:57:22.000Z" itemprop="dateModified">2016-11-01</time>，By <a href="http://949886.github.io" title="LunarEclipse">LunarEclipse</a>
+        </div>
+        
+        <div class="post-body-inner">
+            <div id="toc" class="toc-article well">
+                <strong class="toc-title">大纲</strong>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-number">1.</span> <span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSString"><span class="toc-number">1.1.</span> <span class="toc-text">NSString</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSAttributedString"><span class="toc-number">1.2.</span> <span class="toc-text">NSAttributedString</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSScanner"><span class="toc-number">1.3.</span> <span class="toc-text">NSScanner</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSRegularExpression"><span class="toc-number">1.4.</span> <span class="toc-text">NSRegularExpression</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日期・时间"><span class="toc-number">2.</span> <span class="toc-text">日期・时间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSDate"><span class="toc-number">2.1.</span> <span class="toc-text">NSDate</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NSDateFormatter"><span class="toc-number">2.1.1.</span> <span class="toc-text">NSDateFormatter</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSCalendar"><span class="toc-number">2.2.</span> <span class="toc-text">NSCalendar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSTimer"><span class="toc-number">2.3.</span> <span class="toc-text">NSTimer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件"><span class="toc-number">3.</span> <span class="toc-text">文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSFileManager"><span class="toc-number">3.1.</span> <span class="toc-text">NSFileManager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSFileHandle"><span class="toc-number">3.2.</span> <span class="toc-text">NSFileHandle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSOutputStream"><span class="toc-number">3.3.</span> <span class="toc-text">NSOutputStream</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络"><span class="toc-number">4.</span> <span class="toc-text">网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSURLSession"><span class="toc-number">4.1.</span> <span class="toc-text">NSURLSession</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XML-JSON解析"><span class="toc-number">5.</span> <span class="toc-text">XML/JSON解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSJSONSerialization"><span class="toc-number">5.1.</span> <span class="toc-text">NSJSONSerialization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSXMLParser"><span class="toc-number">5.2.</span> <span class="toc-text">NSXMLParser</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">6.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSPredicate"><span class="toc-number">6.1.</span> <span class="toc-text">NSPredicate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSProgress"><span class="toc-number">6.2.</span> <span class="toc-text">NSProgress</span></a></li></ol></li></ol>
+            </div>
+            
+            <blockquote>
+<p> <em>Foundation 框架备忘录 . . .</em></p>
+</blockquote>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="NSString"><a href="#NSString" class="headerlink" title="NSString"></a>NSString</h3><hr>
+<big><strong>字符替换</strong></big>   
+
+<p>范围替换</p>
+<ul>
+<li>-(NSString  *)stringByReplacingCharactersInRange:(NSRange)range withString:(NSString  *)replacement; </li>
+</ul>
+<p>替换字符</p>
+<ul>
+<li>-(NSString  *)stringByReplacingOccurrencesOfString:(NSString  *)target withString:(NSString  *)replacement;﻿</li>
+<li>-(NSString  *)stringByReplacingOccurrencesOfString:(NSString  *)target withString:(NSString  *)replacement options:(NSStringCompareOptions)options range:(NSRange)searchRange;</li>
+</ul>
+<pre><code class="objc"><span class="built_in">NSString</span>  * string = <span class="string">@"Hello, World!"</span>;
+<span class="built_in">NSString</span>  * newString = [string stringByReplacingOccurrencesOfString:<span class="string">@"World"</span> withString:<span class="string">@"Universe"</span>]; <span class="comment">//"Hello, Universe!"</span>
+</code></pre>
+<p><br></p>
+<big><strong>字符比较</strong></big>
+
+<ul>
+<li>-(NSComparisonResult)compare:(NSString *)string;</li>
+<li>-(NSComparisonResult)localizedCompare:(NSString *)string;</li>
+</ul>
+<p><strong> <em>localizedCompare:</em> </strong>方法会根据当前系统语言选择进行比较的方法，如简体中文环境按拼音排序，繁体中文环境按笔画排序。返回结果：</p>
+<ul>
+<li>NSOrderedAscending      当前字符靠前</li>
+<li>NSOrderedSame              相同</li>
+<li>NSOrderedDescending    当前字符靠后</li>
+</ul>
+<p>用localizedCompare:方法对字符串数组进行排序：</p>
+<pre><code class="objc"><span class="built_in">NSArray</span> *array = @[<span class="string">@"超人"</span>, <span class="string">@"Superman"</span>, <span class="string">@"蝙蝠侠"</span>, <span class="string">@"Batman"</span>, <span class="string">@"X战警"</span>, <span class="string">@"X-man"</span>, <span class="string">@"钢铁侠"</span>, <span class="string">@"Ironman"</span>];
+<span class="built_in">NSArray</span> *sortedArray = [array sortedArrayUsingSelector:<span class="keyword">@selector</span>(localizedCompare:)];
+<span class="keyword">for</span> (<span class="built_in">NSString</span> * string <span class="keyword">in</span> sortedArray) <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, string); 
+<span class="comment">//Output(zh_CN): 蝙蝠侠 超人 钢铁侠 Batman Ironman Superman X-man X战警</span>
+</code></pre>
+<p><br></p>
+<big><strong>分割字符串</strong></big>
+
+<pre><code class="objc"><span class="built_in">NSString</span> * string =<span class="string">@"http://www.example.com?param=1"</span>;
+<span class="built_in">NSArray</span> * array = [string componentsSeparatedByString:<span class="string">@"?"</span>];
+<span class="comment">//array: [@"http://www.example.com", @"param=1"]</span>
+</code></pre>
+<p><br></p>
+<h3 id="NSAttributedString"><a href="#NSAttributedString" class="headerlink" title="NSAttributedString"></a>NSAttributedString</h3><hr>
+<p>常用的Attributes：</p>
+<ul>
+<li>NSFontAttributeName  [UIFont] 字体</li>
+<li>NSForegroundColorAttributeName  [UIColor] 字体颜色 </li>
+<li>NSBackgroundColorAttributeName  [UIColor] 背景色 </li>
+<li>NSKernAttributeName  [NSNumber] 文字间距 </li>
+<li>NSParagraphStyleAttributeName  [NSParagraphStyle] 段落 </li>
+<li>NSStrikethroughStyleAttributeName  [NSNumber] 删除线（默认为0，无删除线）</li>
+<li>NSStrikethroughColorAttributeName  [UIColor] 删除线颜色 </li>
+<li>NSUnderlineStyleAttributeName  [NSNumber] 下划线 （默认为0，无下划线）</li>
+<li>NSUnderlineColorAttributeName  [UIColor] 下划线颜色 </li>
+<li>NSStrokeWidthAttributeName [NSNumber] 描边宽度 </li>
+<li>NSStrokeColorAttributeName [UIColor] 描边颜色（取值[-∞, 1]，表示与字体大小的百分比，负数则在字体外部描边，正数表示在文字内部描边，1则会覆盖文字颜色） </li>
+<li>NSShadowAttributeName  [NSShadow] 阴影</li>
+<li>NSObliquenessAttributeName  [NSNumber] 斜体（默认为0，不倾斜）</li>
+<li>NSTextEffectAttributeName  [NSString] 文字效果</li>
+</ul>
+<big><strong>拼接图片和字符</strong></big>
+
+<pre><code class="objc"><span class="built_in">NSTextAttachment</span> * attachment = [[<span class="built_in">NSTextAttachment</span> alloc] init];
+attachment.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>];
+attachment.bounds = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">15</span>, <span class="number">15</span>);
+<span class="built_in">NSAttributedString</span> *attachmentString = [<span class="built_in">NSAttributedString</span> attributedStringWithAttachment:attachment]; 
+
+<span class="keyword">int</span> index = textView.selectedRange.location;
+[attributedText insertAttributedString:attachString atIndex:insertIndex];
+</code></pre>
+<p><br></p>
+<h3 id="NSScanner"><a href="#NSScanner" class="headerlink" title="NSScanner"></a>NSScanner</h3><hr>
+<big><strong>获取两个字符串间的字符串</strong></big>
+
+<pre><code class="objc"><span class="class"><span class="keyword">@interface</span> <span class="title">NSString</span> (<span class="title">Extension</span>)</span>
+- (<span class="built_in">NSString</span> *)substringWithStart:(<span class="built_in">NSString</span> *)start End:(<span class="built_in">NSString</span> *)end
+{
+    <span class="keyword">if</span>(start &amp;&amp; ![<span class="keyword">self</span> containsString:start]) <span class="keyword">return</span> <span class="literal">nil</span>;
+    <span class="keyword">if</span>(end &amp;&amp; ![<span class="keyword">self</span> containsString:end]) <span class="keyword">return</span> <span class="literal">nil</span>;
+
+    <span class="built_in">NSString</span> * result;
+    <span class="built_in">NSScanner</span> * scanner = [<span class="built_in">NSScanner</span> scannerWithString:<span class="keyword">self</span>];
+    <span class="keyword">if</span>(<span class="literal">nil</span> != start) {
+        [scanner scanUpToString:start intoString:&amp;result];
+        [scanner scanString:start intoString:&amp;result];
+    }
+    <span class="keyword">if</span>(<span class="literal">nil</span> == end) end = <span class="string">@"\0"</span>;
+    [scanner scanUpToString:end intoString:&amp;result];
+
+    <span class="keyword">return</span> result;
+}
+<span class="keyword">@end</span>  
+
+<span class="built_in">NSString</span> * string = <span class="string">@"https://api.example.com/parms?text=a&amp;query=search"</span>;
+<span class="built_in">NSString</span> * substring = [string substringWithStart:<span class="string">@"query="</span> End:<span class="literal">nil</span>];
+<span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, substring); <span class="comment">//Output:search</span>
+</code></pre>
+<p><strong> <em>scanString:intoString:</em> </strong> 从当前扫描位置开始出现相同字符串则返回YES并通过过第二个参数返回该参数，否则返回NO。<br><strong> <em>scanUpToString:intoString:</em> </strong> 方法会对字符串进行扫描直到遇到指定字符串出现，若出现返回YES且将扫描经过的字符串通过第二个参数返回，扫描位置会移至扫描到字符串前，否则返回NO。</p>
+<p><br></p>
+<big><strong>提取字符串中的数字</strong></big>
+
+<p>&#13;&#10;</p>
+<p>提取数字：</p>
+<pre><code class="objc"><span class="built_in">NSScanner</span> *scanner = [<span class="built_in">NSScanner</span> scannerWithString:<span class="string">@"XXX123"</span>];
+[scanner setCharactersToBeSkipped:[<span class="built_in">NSCharacterSet</span> letterCharacterSet]];
+[scanner scanInteger:&amp;integer];
+<span class="built_in">NSLog</span>(<span class="string">@"%d"</span>, integer); <span class="comment">//Output: 123</span>
+</code></pre>
+<p>提取出现的所有数字作为数组：</p>
+<pre><code class="objc"><span class="built_in">NSMutableArray</span> *mArray = [<span class="built_in">NSMutableArray</span> new];
+<span class="built_in">NSScanner</span> *scanner = [<span class="built_in">NSScanner</span> scannerWithString:<span class="string">@"XXX123YYY456"</span>];
+[scanner setCharactersToBeSkipped:[<span class="built_in">NSCharacterSet</span> letterCharacterSet]];
+<span class="keyword">while</span> (scanner.isAtEnd == <span class="literal">NO</span>) {
+    <span class="built_in">NSInteger</span> integer = <span class="number">0</span>;
+    [scanner scanInteger:&amp;integer];
+    [mArray addObject:[<span class="built_in">NSNumber</span> numberWithInteger:integer]];
+}
+<span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, mArray); <span class="comment">//Output: {123, 456}</span>
+</code></pre>
+<p><strong> <em>scanInteger: </em> </strong><br><strong> <em>setCharactersToBeSkipped: </em> </strong></p>
+<h3 id="NSRegularExpression"><a href="#NSRegularExpression" class="headerlink" title="NSRegularExpression"></a>NSRegularExpression</h3><hr>
+<p>NSRegularExpression是Cocoa中用于处理正则表达式的API（什么是正则表达式，请参考这篇文章：<a href="http://www.oschina.net/question/12_9507" target="_blank" rel="external">正则表达式30分钟入门教程</a>）。<br>下面通过一个例子来可以轻松理解NSRegularExpression的使用。该程序的功能为匹配一对中括号（中括号中可以有任意长度的内容，但是不包括成对的中括号），并将匹配到的内容全部替换成「&lt;表情&gt;」。</p>
+<pre><code class="objc"><span class="built_in">NSString</span> * pattern = <span class="string">@"\\[[^ \\[\\]]+?\\]"</span>;
+<span class="built_in">NSString</span> * string = <span class="string">@"[哆啦A梦害怕]好可怕[哆啦A梦害怕]我得走"</span>;
+<span class="built_in">NSString</span> * replacement = <span class="string">@"&lt;表情&gt;"</span>; <span class="comment">//将匹配到的字符串替换成该字符串 </span>
+
+<span class="built_in">NSRegularExpression</span> * regex = [<span class="built_in">NSRegularExpression</span> regularExpressionWithPattern:pattern options:<span class="built_in">NSRegularExpressionCaseInsensitive</span> error:<span class="literal">nil</span>];
+<span class="built_in">NSArray</span> * matchs = [regex matchesInString:string options:<span class="built_in">NSMatchingReportCompletion</span> range:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, string.length)]; 
+
+<span class="keyword">int</span> offset = <span class="number">0</span>; <span class="comment">//替换完后源字符串将变短，用该值进行补偿</span>
+<span class="keyword">for</span> (<span class="built_in">NSTextCheckingResult</span> * match <span class="keyword">in</span> matchs)  {
+        <span class="built_in">NSRange</span> range = <span class="built_in">NSMakeRange</span>(match.range.location - offset, match.range.length);
+        string = [string stringByReplacingCharactersInRange:range withString: replacement];
+        offset += range.length - replacement.length;
+} 
+
+<span class="built_in">NSLog</span>(<span class="string">@"Result string: %@"</span>, string); <span class="comment">//Output: &lt;表情&gt;好可怕&lt;表情&gt;我得走</span>
+</code></pre>
+<p><br></p>
+<h2 id="日期・时间"><a href="#日期・时间" class="headerlink" title="日期・时间"></a>日期・时间</h2><h3 id="NSDate"><a href="#NSDate" class="headerlink" title="NSDate"></a>NSDate</h3><hr>
+<p>Objective-C 中的日期工具类。</p>
+<p>创建一个当前时间的NSDate对象（或者直接[NSDate new]）：<br>+(instancetype)date;​﻿​    </p>
+<big><strong>时间间隔</strong></big>
+
+<p>&#13;&#10;</p>
+<p><code>计算与另一个NSDate对象的时间间隔</code><br>@return 时间间隔（若date比anotherDate早则返回负数）typedef double NSTimeInterval (单位: 秒)<br>-(NSTimeInterval)timeIntervalSinceDate:(NSDate *)anotherDate;﻿</p>
+<p><code>通过时间间隔获取日期</code><br>@param ti 时间间隔<br>@return 加上了时间间隔的新NSDate对象<br>-(instancetype)dateByAddingTimeInterval:(NSTimeInterval)ti;﻿</p>
+<big><strong>比较日期</strong></big>
+
+<table>
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>&nbsp; </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>　</td>
+<td>NSOrderedAscending  //当前日期更早</td>
+</tr>
+<tr>
+<td>[[NSDate date] compare: anotherDate]  　= 　</td>
+<td>NSOrderedSame       //相同</td>
+</tr>
+<tr>
+<td>　</td>
+<td>NSOrderedAscending  //当前日期更早</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<big><strong>格式化</strong></big>
+
+<h4 id="NSDateFormatter"><a href="#NSDateFormatter" class="headerlink" title="NSDateFormatter"></a>NSDateFormatter</h4><p>常用属性：</p>
+<ul>
+<li><em>dateFormat</em>    [NSString]    格式<br>一般格式：yyyy-MM-dd HH:mm:ss  —  2016-03-28 17:44:55<br>欧美格式：EEE MMM dd HH:mm:ss ZZZZ yyyy —  Mon Mar 28 18:55:16 +0800 2016<br>关于时间格式详见：﻿<a href="http://userguide.icu-project.org/formatparse/datetime" target="_blank" rel="external">Formatting an﻿d Parsing‎</a></li>
+<li>﻿﻿<em>locale</em>    [NSLocale]    地区</li>
+</ul>
+<p>NSString → NSDate：</p>
+<pre><code class="objc"><span class="built_in">NSDateFormatter</span> * formatter = [<span class="built_in">NSDateFormatter</span> new];
+formatter.dateFormat = <span class="string">@"yyyy-MM-dd HH:mm:ss"</span>;
+formatter.locale = [<span class="built_in">NSLocale</span> localeWithLocaleIdentifier:<span class="string">@"en_US"</span>];
+<span class="built_in">NSDate</span> * date = [formatter dateFromString:string];
+</code></pre>
+<p>NSDate → NSString：</p>
+<pre><code class="objc"><span class="built_in">NSDateFormatter</span> * formatter = [<span class="built_in">NSDateFormatter</span> new]; 
+formatter.dateFormat = <span class="string">@"yyyy-MM-dd HH:mm:ss"</span>; 
+formatter.locale = [<span class="built_in">NSLocale</span> localeWithLocaleIdentifier:<span class="string">@"en_US"</span>];
+<span class="built_in">NSString</span> * string = [formatter stringFromDate:date];
+</code></pre>
+<h3 id="NSCalendar"><a href="#NSCalendar" class="headerlink" title="NSCalendar"></a>NSCalendar</h3><h3 id="NSTimer"><a href="#NSTimer" class="headerlink" title="NSTimer"></a>NSTimer</h3><p>初始化：</p>
+<p>+(NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo;<br>+(NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo;</p>
+<p><strong> <em> timerWithTimeInterval: </em> </strong> 创建NSTimer的基本方法（需要加入RunLoop才会生效）<br><strong> <em> scheduledTimerWithTimeInterval: </em> </strong>会创建一个NSTimer，并将timer自动加入RunLoop中，且Mode为NSDefaultRunLoopMode</p>
+<big><strong>将Timer加入RunLoop</strong></big>
+
+<p>&#13;&#10;</p>
+<pre><code class="objc"><span class="built_in">NSTimer</span> * timer = [<span class="built_in">NSTimer</span> timerWithTimeInterval:interval target:target selector:selector userInfo:<span class="literal">nil</span> repeats:<span class="literal">true</span>];
+<span class="built_in">NSRunLoop</span> * currentLoop = [<span class="built_in">NSRunLoop</span> currentRunLoop];
+[currentLoop addTimer:timer forMode:<span class="built_in">NSDefaultRunLoopMode</span>];﻿​
+</code></pre>
+<p>Mode: 选择在RunLoop的那种模式下运行，常用值如下</p>
+<ul>
+<li>NSDefaultRunLoopMode 默认情况（滚动时timer将不运行）</li>
+<li>UITrackingRunLoopMode 当UIScrollView发生滚动的情况</li>
+<li>NSRunLoopCommonModes 主线程RunLoop的CommonModes包括以上两种Mode，即滚动和默认情况都会运行。</li>
+</ul>
+<big><strong>Timer的释放</strong></big>
+
+<p> 将Timer 添加到 Runloop ，Runloop会对Timer强引用，而Timer又拥有target(一般为self)的强引用，会造成self无法释放。故在self释放前需要对timer进行invalidate。</p>
+<p> Timer在Controller中：</p>
+<pre><code class="objc">- (<span class="keyword">void</span>) viewWillDisappear:(<span class="built_in">BOOL</span>)animated {
+    [<span class="keyword">self</span> viewWillDisappear:animated];
+    [<span class="keyword">self</span>.timer invalidate];
+    <span class="keyword">self</span>.timer = <span class="literal">nil</span>;
+}
+</code></pre>
+<p>  Timer在View中：</p>
+<pre><code class="objc">-(<span class="keyword">void</span>)removeFromSuperview {
+    [<span class="keyword">super</span> removeFromSuperview];
+    [<span class="keyword">self</span>.timer invalidate];
+    <span class="keyword">self</span>.timer = <span class="literal">nil</span>;
+}
+</code></pre>
+<big><strong>暂停与恢复Timer</strong></big>
+
+<p>暂停： timer.fireDate = [NSDate distantFuture];<br>恢复： timer.fireDate = [NSDate date];</p>
+<p><br></p>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><h3 id="NSFileManager"><a href="#NSFileManager" class="headerlink" title="NSFileManager"></a>NSFileManager</h3><hr>
+<p>NSFileManager 是 Foundation 框架中处理文件系统API。采用单例设计模式：<br>+(NSFileManager *)defaultManager;﻿​</p>
+<big><strong>文件是否存在</strong></big>
+
+<ul>
+<li>-(BOOL)fileExistsAtPath:(NSString *)path;</li>
+<li>-(BOOL)fileExistsAtPath:(NSString <em>)path isDirectory:(nullable BOOL </em>)isDirectory;</li>
+<li>-(nullable NSArray<nsstring *=""> <em>)subpathsAtPath:(NSString </em>)path;</nsstring></li>
+</ul>
+<big><strong>计算文件及文件夹大小</strong></big>
+
+<p>&#13;&#10;</p>
+<pre><code class="objc"><span class="class"><span class="keyword">@interface</span> <span class="title">NSFileManager</span> (<span class="title">Extension</span>)</span>
++(<span class="keyword">long</span> <span class="keyword">long</span>)folderSizeWithPath:(<span class="built_in">NSString</span> *)path {
+    <span class="keyword">long</span> <span class="keyword">long</span> size = <span class="number">0</span>;
+    <span class="built_in">NSFileManager</span> * manager = [<span class="built_in">NSFileManager</span> defaultManager];
+    <span class="keyword">if</span>(![manager fileExistsAtPath:path]) <span class="keyword">return</span> <span class="number">0</span>; 
+
+    <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; * subpaths = [manager subpathsAtPath:path];
+    <span class="keyword">for</span> (<span class="built_in">NSString</span> * subpath <span class="keyword">in</span> subpaths) {
+        <span class="built_in">NSString</span> * fullpath = [path stringByAppendingPathComponent:subpath];
+        size += [<span class="keyword">self</span> fileSizeWithPath:fullpath];
+    }
+    <span class="keyword">return</span> size;
+} 
+
++(<span class="keyword">long</span> <span class="keyword">long</span>)fileSizeWithPath:(<span class="built_in">NSString</span> *)path {
+    <span class="built_in">NSFileManager</span> *manager = [<span class="built_in">NSFileManager</span> defaultManager];
+    <span class="keyword">if</span> (![manager fileExistsAtPath:path]) <span class="keyword">return</span> <span class="number">0</span>;
+    <span class="keyword">return</span> [[manager attributesOfItemAtPath:path error:<span class="literal">nil</span>] fileSize];
+}
+<span class="keyword">@end</span>
+</code></pre>
+<p>注意：计算出来文件大小的单位为字节，系统计算大小的进制为1000，故要以MB显示需要将结果除以1,000,000。</p>
+<big><strong>获取文件属性</strong></big>
+
+<p>&#13;&#10;</p>
+<pre><code class="objc"><span class="built_in">NSFileManager</span> * manager = [<span class="built_in">NSFileManager</span> defaultManager];
+<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; * attributes = [manager attributesOfItemAtPath:path error:<span class="literal">nil</span>];
+<span class="keyword">long</span> <span class="keyword">long</span> fileSize = attribute[<span class="built_in">NSFileSize</span>]; <span class="comment">//通过Key获得属性值（以FileSize为例）</span>
+<span class="keyword">long</span> <span class="keyword">long</span> fileSize = [attribute fileSize];  <span class="comment">//通过NSDictionary的NSFileAttributes Category属性获得属性值（结果相同）</span>
+</code></pre>
+<p>常用文件属性：</p>
+<ul>
+<li>NSFileSize 文件字节大小</li>
+<li>NSFileType 文件类型 ，常用值如下<ul>
+<li>NSFileTypeRegular 普通文件</li>
+<li>NSFileTypeDirectory 文件夹</li>
+<li>NSFileTypeSymbolicLink 快捷方式</li>
+<li>NSFileTypeUnknown 未知</li>
+</ul>
+</li>
+<li>NSFileCreationDate 创建日期</li>
+<li>NSFileModificationDate 修改日期</li>
+</ul>
+<ul>
+<li>NSFileSystemSize 系统磁盘大小（Category无对应方法）</li>
+<li>NSFileSystemFreeSize 系统磁盘剩余大小（Category无对应方法）</li>
+</ul>
+<p>也可以通过NSDictionary的NSFileAttributes Category获取属性值：</p>
+<pre><code class="objc"><span class="class"><span class="keyword">@interface</span> <span class="title">NSDictionary</span>&lt;<span class="title">KeyType</span>, <span class="title">ObjectType</span>&gt; (<span class="title">NSFileAttributes</span>)</span>
+-(<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>)fileSize;
+-(<span class="keyword">nullable</span> <span class="built_in">NSString</span> *)fileType; 
+-(<span class="keyword">nullable</span> <span class="built_in">NSDate</span> *)fileCreationDate;
+-(<span class="keyword">nullable</span> <span class="built_in">NSDate</span> *)fileModificationDate;
+<span class="keyword">@end</span>
+</code></pre>
+<h3 id="NSFileHandle"><a href="#NSFileHandle" class="headerlink" title="NSFileHandle"></a>NSFileHandle</h3><hr>
+<p> NSFileHandle提供了对文件的基本I/O操作方法。</p>
+<p>初始化：</p>
+<ul>
+<li>+(nullable instancetype)fileHandleForReadingAtPath:(NSString *)path;  [读取]</li>
+<li>+(nullable instancetype)fileHandleForWritingAtPath:(NSString *)path; [写入]</li>
+<li>+(nullable instancetype)fileHandleForUpdatingAtPath:(NSString *)path;﻿​  [读写]</li>
+</ul>
+<p>读取文件数据：</p>
+<ul>
+<li>-(NSData *)readDataToEndOfFile;</li>
+<li>-(NSData *)readDataOfLength:(NSUInteger)length;</li>
+</ul>
+<p>写入数据：</p>
+<ul>
+<li>-(void)writeData:(NSData *)data;</li>
+</ul>
+<p>偏移量：</p>
+<ul>
+<li>-(unsigned long long)seekToEndOfFile;</li>
+<li>-(void)seekToFileOffset:(unsigned long long)offset;</li>
+</ul>
+<p>其他：</p>
+<ul>
+<li>-(void)synchronizeFile;</li>
+<li>-(void)closeFile;</li>
+</ul>
+<h3 id="NSOutputStream"><a href="#NSOutputStream" class="headerlink" title="NSOutputStream"></a>NSOutputStream</h3><hr>
+<p>初始化：</p>
+<ul>
+<li>+(instancetype)outputStreamToBuffer:(uint8_t *)buffer capacity:(NSUInteger)capacity;</li>
+<li>+(instancetype)outputStreamToFileAtPath:(NSString *)path append:(BOOL)shouldAppend;</li>
+</ul>
+<p>打开一个OutputStream并向文件中写入流数据：</p>
+<pre><code class="objc"><span class="built_in">NSOutputStream</span> * stream = [<span class="built_in">NSOutputStream</span> outputStreamToFileAtPath:path append:<span class="literal">YES</span>];
+[stream open];  <span class="comment">//开启流，文件不存在则会自动创建文件</span>
+[stream write:data.bytes maxLength:data.length]; <span class="comment">//data: NSData</span>
+[stream close]; <span class="comment">//关闭流</span>
+</code></pre>
+<p> 注意: 如果目录未创建则不会创建文件，应在目录不存在的情况下先创建目录。</p>
+<p><br></p>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><h3 id="NSURLSession"><a href="#NSURLSession" class="headerlink" title="NSURLSession"></a>NSURLSession</h3><hr>
+<big><strong>发送简单的HTTP请求</strong></big>
+
+<p>&#13;&#10;</p>
+<pre><code class="objc"><span class="built_in">NSMutableURLRequest</span> * request = [<span class="built_in">NSMutableURLRequest</span> requestWithURL:[<span class="built_in">NSURL</span> URLWithString:url]];
+request.HTTPMethod = <span class="string">@"POST"</span>;
+request.HTTPBody = <span class="string">@"username=xxx&amp;pwd="</span> + encryptedPassword;
+[request addValue:<span class="string">@"xxx"</span> forHTTPHeaderField:<span class="string">@"HeaderField"</span>]; 
+
+<span class="built_in">NSURLSession</span> * session = [<span class="built_in">NSURLSession</span> sharedSession];
+<span class="built_in">NSURLSessionDataTask</span> * task = [[<span class="built_in">NSURLSession</span> sharedSession] dataTaskWithRequest:request completionHandler:^(<span class="built_in">NSData</span> * data, <span class="built_in">NSURLResponse</span> * response, <span class="built_in">NSError</span> * error) {
+    <span class="built_in">NSDictionary</span> * dict = [<span class="built_in">NSJSONSerialization</span> JSONObjectWithData:data options:<span class="number">0</span> error:<span class="literal">nil</span>];
+}];
+[task resume];﻿ <span class="comment">//必须调用task的rusume方法才会执行请求</span>
+</code></pre>
+<big><strong>Delegate</strong></big>
+
+<p>&#13;&#10;</p>
+<p>NSURLSessionDataDelegate</p>
+<pre><code class="objc"><span class="comment">//1.接收到服务器响应</span>
+- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session dataTask:(<span class="built_in">NSURLSessionDataTask</span> *)dataTask didReceiveResponse:(<span class="built_in">NSURLResponse</span> *)response completionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">NSURLSessionResponseDisposition</span> disposition))completionHandler; {
+    <span class="comment">//传入NSURLSessionResponceAllow:允许连接 NSURLSessionResponceCancel:拒绝</span>
+    completionHandler(<span class="built_in">NSURLSessionResponseAllow</span>);   
+}
+<span class="comment">//2.接收到数据（调用多次）</span>
+- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session dataTask:(<span class="built_in">NSURLSessionDataTask</span> *)dataTask didReceiveData:(<span class="built_in">NSData</span> *)data {
+
+}
+</code></pre>
+<p>NSURLSessionDelegate</p>
+<pre><code class="objc"><span class="comment">//3.请求结果（失败则error不为空），会在请求结束时调用</span>
+- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session task:(<span class="built_in">NSURLSessionTask</span> *)task didCompleteWithError:(<span class="keyword">nullable</span> <span class="built_in">NSError</span> *)error {
+    <span class="comment">/* 请求结束 */</span>
+}
+<span class="comment">//处理302重定向</span>
+- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session task:(<span class="built_in">NSURLSessionTask</span> *)task willPerformHTTPRedirection:(<span class="built_in">NSHTTPURLResponse</span> *)response newRequest:(<span class="built_in">NSURLRequest</span> *)request completionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">NSURLRequest</span> *))completionHandler {
+    <span class="built_in">NSString</span> * redirectedURL = response.allHeaderFields[<span class="string">@"Location"</span>];
+    completionHandler(<span class="literal">nil</span>);    <span class="comment">//传入nil则不执行重定向，或者传入一个新的request并跳转至request.URL</span>
+}
+</code></pre>
+<big><strong>创建简单的下载任务</strong></big>
+
+<p>&#13;&#10;</p>
+<pre><code class="objc"><span class="built_in">NSURLSession</span> * session = [<span class="built_in">NSURLSession</span> sharedSession];
+<span class="built_in">NSURLSessionDownloadTask</span> *task = [session downloadTaskWithURL:[<span class="built_in">NSURL</span> URLWithString:url] completionHandler:^(<span class="built_in">NSURL</span> *location, <span class="built_in">NSURLResponse</span> *response, <span class="built_in">NSError</span> *error) {
+    <span class="comment">//下载的文件会存在tmp目录下，若要保存则需要将其将临时文件移至cache文件夹</span>
+    <span class="built_in">NSString</span> * cacheDir = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).lastObject;
+    <span class="built_in">NSString</span> * path = [cacheDir stringByAppendingPathComponent:response.suggestedFilename];
+    [[<span class="built_in">NSFileManager</span> defaultManager] moveItemAtURL:location toURL:[<span class="built_in">NSURL</span> fileURLWithPath:path] error:<span class="literal">nil</span>];
+}];
+[task resume];
+</code></pre>
+<big><strong>Delegate</strong></big>
+
+<p>NSURLSessionDownloadDelegate</p>
+<pre><code class="objc"><span class="comment">//1. Start: 任务resume回调（一般用于处理断点续传）</span>
+- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session downloadTask:(<span class="built_in">NSURLSessionDownloadTask</span> *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes {
+
+}
+<span class="comment">// 2. Progress: 下载过程回调</span>
+- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session downloadTask:(<span class="built_in">NSURLSessionDownloadTask</span> *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
+    <span class="keyword">double</span> progress = (<span class="keyword">double</span>)bytesWritten / totalBytesExpectedToWrite; <span class="comment">//下载进度</span>
+    <span class="comment">/* other task... */</span>
+} 
+<span class="comment">//3. Complete: 下载完毕回调</span>
+- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session downloadTask:(<span class="built_in">NSURLSessionDownloadTask</span> *)downloadTask didFinishDownloadingToURL:(<span class="built_in">NSURL</span> *)location {
+    <span class="comment">//下载的文件默认在tmp目录，需要手动移动到cache目录</span>
+    <span class="built_in">NSString</span> * cacheDir = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).firstObject; 
+    <span class="built_in">NSString</span> * path = [cacheDir stringByAppendingPathComponent:downloadTask.response.suggestedFilename];
+    [[<span class="built_in">NSFileManager</span> defaultManager]moveItemAtURL:location toURL:[<span class="built_in">NSURL</span> URLWithString:path] error:<span class="literal">nil</span>];
+}
+</code></pre>
+<p><br></p>
+<h2 id="XML-JSON解析"><a href="#XML-JSON解析" class="headerlink" title="XML/JSON解析"></a>XML/JSON解析</h2><p>虽然对于XML、JSON的解析已经有各种成熟的三方框架（YYModel、Mantle、JsonModel、MJExtension等），但是对于Cocoa框架中集成的XML、JSON解析类的了解也很有必要。</p>
+<h3 id="NSJSONSerialization"><a href="#NSJSONSerialization" class="headerlink" title="NSJSONSerialization"></a>NSJSONSerialization</h3><hr>
+<h3 id="NSXMLParser"><a href="#NSXMLParser" class="headerlink" title="NSXMLParser"></a>NSXMLParser</h3><hr>
+<p>XML文件的解析有两种方式：SAX (Simple API for XML)、DOM (Document Object for Model)。</p>
+<ul>
+<li>SAX解析器是事件驱动的，他会顺序解析XML文件中的元素。适合解析大文件。</li>
+<li>DOM解析器会将整个XML文档以树的形式读取到内存中，会消耗较多的内存资源，XML文件越大弊端越明显。故适合解析小文件。</li>
+</ul>
+<p>Cocoa框架自然也都提供了这两种方式的解析器，而作为DOM解析器的XML处理类NSXMLDocument、NSXMLElement、NSXMLNode只能在OS X系统中使用，在iOS中可以使用支持SAX方式解析的NSXMLParser类，或者基于纯C语言的libxml库（支持SAX与DOM解析）。</p>
+<p>通过NSXMLParser解析XML，并打印xml内容：</p>
+<pre><code class="objc"><span class="class"><span class="keyword">@interface</span> <span class="title">XMLParser</span> : <span class="title">NSObject</span> &lt;<span class="title">NSXMLParserDelegate</span>&gt;</span>
++ (<span class="keyword">void</span>)parse:(<span class="built_in">NSString</span> *)xml;
+<span class="keyword">@end</span> 
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">XMLParser</span> </span>
++ (<span class="keyword">void</span>)parse:(<span class="built_in">NSString</span> *)xml
+{
+    <span class="built_in">NSData</span> * data = [xml dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];
+    <span class="built_in">NSXMLParser</span> * parser = [[<span class="built_in">NSXMLParser</span> alloc]initWithData:data];
+    XMLParser * delegate = [XMLParser new];
+    parser.delegate = delegate;
+    [parser parse];
+} 
+<span class="comment">//开始解析xml文件时调用</span>
+- (<span class="keyword">void</span>)parserDidStartDocument:(<span class="built_in">NSXMLParser</span> *)parser {
+    <span class="built_in">NSLog</span>(<span class="string">@"parserDidStartDocument"</span>);
+} 
+<span class="comment">//结束解析xml文件时调用</span>
+- (<span class="keyword">void</span>)parserDidEndDocument:(<span class="built_in">NSXMLParser</span> *)parser {
+    <span class="built_in">NSLog</span>(<span class="string">@"parserDidEndDocument"</span>);
+} 
+<span class="comment">//解析到一个元素的开始时调用，如&lt;a href="http://www.example.com"&gt;。</span>
+- (<span class="keyword">void</span>)parser:(<span class="built_in">NSXMLParser</span> *)parser didStartElement:(<span class="built_in">NSString</span> *)elementName namespaceURI:(<span class="keyword">nullable</span> <span class="built_in">NSString</span> *)namespaceURI qualifiedName:(<span class="keyword">nullable</span> <span class="built_in">NSString</span> *)qName attributes:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="built_in">NSString</span> *&gt; *)attributeDict {
+    __block <span class="built_in">NSString</span> * attributes = <span class="string">@""</span>;
+    [attributeDict enumerateKeysAndObjectsUsingBlock:^(<span class="built_in">NSString</span> * _Nonnull key, <span class="built_in">NSString</span> * _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) {
+        attributes = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@ %@=\"%@\""</span>, attributes, key, obj];
+    }];
+    printf(<span class="string">"&lt;%s %s&gt;"</span>, elementName.UTF8String, attributes.UTF8String);
+} 
+<span class="comment">//解析到一个元素的结束时调用，如&lt;/a&gt;</span>
+- (<span class="keyword">void</span>)parser:(<span class="built_in">NSXMLParser</span> *)parser didEndElement:(<span class="built_in">NSString</span> *)elementName namespaceURI:(<span class="keyword">nullable</span> <span class="built_in">NSString</span> *)namespaceURI qualifiedName:(<span class="keyword">nullable</span> <span class="built_in">NSString</span> *)qName {
+    printf(<span class="string">"&lt;/%s&gt;"</span>, elementName.UTF8String);
+} 
+<span class="comment">//解析到元素的内容如&lt;a href="http://www.example.com"&gt;Link&lt;/a&gt;中的Link时调用</span>
+- (<span class="keyword">void</span>)parser:(<span class="built_in">NSXMLParser</span> *)parser foundCharacters:(<span class="built_in">NSString</span> *)string {
+    printf(<span class="string">"%s"</span>, string.UTF8String);
+}
+<span class="keyword">@end</span>
+
+<span class="comment">/* Test */</span>
+<span class="built_in">NSString</span> * url = <span class="string">@"http://comment.bilibili.com/1114146.xml"</span>;
+<span class="built_in">NSString</span> * xml = [<span class="built_in">NSString</span> stringWithContentsOfURL:[<span class="built_in">NSURL</span> URLWithString:url] encoding:<span class="built_in">NSUTF8StringEncoding</span> error:<span class="literal">nil</span>];
+[XMLParser parse:xml];
+</code></pre>
+<p><br></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="NSPredicate"><a href="#NSPredicate" class="headerlink" title="NSPredicate"></a>NSPredicate</h3><hr>
+<p><strong> 参考: </strong> [NSPredicate]<a href="http://nshipster.cn/nspredicate/" target="_blank" rel="external">http://nshipster.cn/nspredicate/</a></p>
+<h3 id="NSProgress"><a href="#NSProgress" class="headerlink" title="NSProgress"></a>NSProgress</h3><hr>
+
+
+			
+            <section class="comment">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/2016/05/30/Cocoa框架/" data-title="Cocoa框架" data-url="http://949886.github.io/2016/05/30/Cocoa框架/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"949886"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</section>
+        </div>
+    </div>
+</article>
+
+    <footer id="footer">
+    <div id="bottom-tip">
+        月蝕
+    </div>
+        <small>该博客由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动，搭载 <a href="https://github.com/XadillaX/hexadillax" target="_blank">Hexadillax</a> 主题</small><br />
+        <small>&copy; 2014 LunarEclipse</small>
+    </footer>
+
+    
+
+
+</body>
+</html>
+
