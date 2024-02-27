@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>基于 Attribute 反射的消息系统 | LunarEclipse&#39;s Home</title>
+        <title>Archives | LunarEclipse&#39;s Home</title>
         <meta name="author" content="Lunar Eclipse" />
         <meta name="description" content="" />
         <meta name="keywords" content="" />
@@ -30,13 +30,6 @@
 
 
 <script src="/js/lib/preview.js"></script>
-
-
-
-
-
-<script src="https://cdn.staticfile.org/gitalk/1.8.0/gitalk.min.js"></script>
-<link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.8.0/gitalk.min.css" />
 
 
 
@@ -159,188 +152,54 @@
 </transition>
 
             <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-                <div class="article">
-    <div>
-        <h1>基于 Attribute 反射的消息系统</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/10/18
-        </span>
+                
+<div id="archives">
+    
+    <div id="timeline-wrap" ref="timeline">
         
+        <div class="timeline" data-title="helloworld">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2023/9/10</div>
+                <a href="/2023/09/10/hello-world/">
+                    <h3>Hello World</h3>
+                </a>
+                <div class="info">
+                    
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="test">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2023/9/10</div>
+                <a href="/2023/09/10/test/">
+                    <h3>Test</h3>
+                </a>
+                <div class="info">
+                    
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2024/2/27</div>
+                <a href="/2024/02/27/2024/%E6%BC%AB%E7%95%AB/">
+                    <h3></h3>
+                </a>
+                <div class="info">
+                    
+                    
+                </div>
+            </div>
+        </div>
         
     </div>
-    
-    <div class="content" v-pre>
-        <p>预期的效果：</p>
-<pre><code class="cs">private void Start() &#123; EventBus.Default.Register(this); &#125;
-private void OnDestroy() &#123; EventBus.Default.Unregister(this); &#125;
-
-[Subscribe]
-private void HandleEventSync(ShootMessage message)
-&#123;
-    /* do something when shooting in the same thread */
-&#125;
-
-[Subscribe(ThreadMode.MAIN)]
-private void HandleEvent(ShootMessage message)
-&#123;
-    /* do something when shooting on main thread */
-&#125;
-
-[Subscribe(ThreadMode.BACKGROUND)]
-private void HandleEventAsync(ShootMessage message)
-&#123;
-    /* do something when shooting on background thread */
-&#125;
-
-public void Update()
-&#123;
-    // Triger event.
-    EventBus.Default.Post(new ShootMessage(/*args*/));
-&#125;
-</code></pre>
-<pre><code class="cs">using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Threading;
-using Luna.Core.Dispatch;
-using Luna.Extensions;
-
-namespace Luna.Core.Event
-&#123;
-    public class EventBus
-    &#123;
-        public static EventBus Default = new EventBus();
-
-        // Parameter&#39;s type of subscriber method as key, method delegates as value.
-        private Dictionary&lt;Type, List&lt;Subscription&gt;&gt; eventHandlers = new Dictionary&lt;Type, List&lt;Subscription&gt;&gt;();
-
-        public EventBus() &#123; &#125;
-
-        ~EventBus() &#123; &#125;
-
-        public void Register(object listener)
-        &#123;
-            bool hasAttribute = false;
-
-            // Check [Subscribe] attributes of listener.
-            foreach (MethodInfo method in listener.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
-                foreach (Attribute attribute in method.GetCustomAttributes(true))
-                &#123;
-                    Console.WriteLine(&quot;Register: &quot; + method);
-
-                    Subscribe subscribeInfo = attribute as Subscribe;
-                    if (subscribeInfo == null)
-                        continue;
-                    hasAttribute = true;
-
-                    var parameters = method.GetParameters();
-                    if (parameters.Length == 1)
-                    &#123;
-                        var action = method.CreateDelegate(listener);
-
-                        if (!eventHandlers.ContainsKey(parameters[0].ParameterType))
-                            eventHandlers[parameters[0].ParameterType] = new List&lt;Subscription&gt;();
-                        var subscription = new Subscription(listener, parameters[0].ParameterType, subscribeInfo, action);
-                        eventHandlers[parameters[0].ParameterType].Add(subscription);
-
-                    &#125;
-                    else throw new Exception(&quot;Subscribe method must have only one parameter!&quot;);
-                &#125;
-
-            if (!hasAttribute)
-                throw new Exception(&quot;Subscribe method not found!&quot;);
-        &#125;
-
-        public void Unregister(object listener)
-        &#123;
-            foreach (MethodInfo method in listener.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
-                foreach (Attribute attribute in method.GetCustomAttributes(true))
-                &#123;
-                    Console.WriteLine(&quot;Unregister: &quot; + method);
-
-                    if (!(attribute is Subscribe))
-                        continue;
-
-                    var parameters = method.GetParameters();
-                    if (parameters.Length == 1)
-                    &#123;
-                        var action = method.CreateDelegate(listener);
-                        var type = parameters[0].ParameterType;
-
-                        if (eventHandlers.ContainsKey(type))
-                            eventHandlers[type].RemoveAll(item =&gt; item.Handler == action);
-                    &#125;
-                    else throw new Exception(&quot;Subscribe method must have only one parameter!&quot;);
-                &#125;
-        &#125;
-
-        public void UnregisterAll()
-        &#123;
-            eventHandlers.Clear();
-        &#125;
-
-        public void Post(object newEvent)
-        &#123;
-            var subscriptions = eventHandlers.Get(newEvent.GetType());
-            if (subscriptions == null)
-                return;
-
-            foreach (Subscription sub in subscriptions)
-            &#123;
-                //try &#123; sub.Handler.DynamicInvoke(newEvent); &#125; /* Old implementation without thread mode */
-                try &#123; Invoke(sub, newEvent); &#125; 
-                catch (Exception e)
-                &#123;
-                    Console.WriteLine(e);
-                    throw;
-                &#125;
-            &#125;
-        &#125;
-
-        private void Invoke(Subscription subscription, object newEvent)
-        &#123;
-            switch (subscription.Subscribe.threadMode)
-            &#123;
-                case ThreadMode.DEFAULT:
-                    subscription.Handler.DynamicInvoke(newEvent);
-                    break;
-                case ThreadMode.MAIN:
-                    DispatchQueue.Main.Async(() =&gt; &#123;
-                        subscription.Handler.DynamicInvoke(newEvent);
-                    &#125;);
-                    break;
-                case ThreadMode.BACKGROUND:
-                    DispatchQueue.Global.Async(() =&gt; &#123;
-                        subscription.Handler.DynamicInvoke(newEvent);
-                    &#125;);
-                    break;
-            &#125;
-        &#125;
-
-
-    &#125;
-
-&#125;
-</code></pre>
-<p>20 eventHandlers.Get<br>25 for<br>20 switch<br>140 × 2 dynamicInvoke</p>
-
-    </div>
-    
-    
-    
-    <div id="comment">
-        <div id="gitalk-container"></div>
-    </div>
-    
-    
-    
-    
-    
 </div>
 
                 <footer id="footer">
@@ -371,28 +230,6 @@ namespace Luna.Core.Event
             
         </div>
         <script src="/js/main.js"></script>
-        
-        
-
-<script>
-    const gitalk = new Gitalk({
-        clientID: "1b257199da39cd021fa4",
-        clientSecret: "03478a1dd851368fe32a4eea9483c00ce041e3a2",
-        repo: "949886.github.io",
-        owner: "949886",
-        admin: "949886".split(","),
-        language: "zh-CN",
-        id: location.pathname,
-        
-        proxy: "https://twodimensions.herokuapp.com/https://github.com/login/oauth/access_token",
-        
-    })
-    gitalk.render("gitalk-container");
-</script>
-
-
-
-
         
     </body>
 </html>
