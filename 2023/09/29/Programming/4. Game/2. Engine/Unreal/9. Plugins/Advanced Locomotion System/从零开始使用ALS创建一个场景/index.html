@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>从零开始使用 ALS 创建一个场景 | LunarEclipse&#39;s Home</title>
+        <meta name="author" content="Lunar Eclipse" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/avatar.png" />
+        <script src="https://cdn.staticfile.org/vue/3.3.4/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.8.0/highlight.min.js"></script>
+<script src="https://cdn.staticfile.org/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/dart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/glsl.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.8.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="https://cdn.staticfile.org/gitalk/1.8.0/gitalk.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.8.0/gitalk.min.css" />
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/custom.css" />
+
+<!-- Custom -->
+<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+<canvas id="fireworks" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647"></canvas>
+<script src="/js/fireworks.js"></script>
+<canvas id="background" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"></canvas>
+<script src="/js/background.js"></script>
+<script src="/js/pocket.gl.min.js"></script>
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>LUNARECLIPSE&#39;S HOME</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LUNARECLIPSE&#39;S HOME</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+                <div class="article">
+    <div>
+        <h1>从零开始使用 ALS 创建一个场景</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/9/29
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E8%99%9A%E5%B9%BB/" style="color: #00bcd4">虚幻</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>首先我们需要去下载两个插件，第一个叫做 <a target="_blank" rel="noopener" href="https://github.com/Sixze/ALS-Refactored">ALS-Refactored</a> 的插件。</p>
+<h2 id="如何从零开始使用-ALS-创建一个场景？"><a href="#如何从零开始使用-ALS-创建一个场景？" class="headerlink" title="如何从零开始使用 ALS 创建一个场景？"></a>如何从零开始使用 ALS 创建一个场景？</h2><ol>
+<li>新建一个空关卡。</li>
+<li>打开 窗口 &gt; 环境光照混合器。点击所有的创建按钮。<img src="/media/images/efebdcdfa63e504e8df919d0e49c6e15_MD5.png"></li>
+<li>按 Shift 2 进入地形模式。点击创建地形。</li>
+<li>点击快速添加 <img src="/media/images/33c70695d1ac8e14ffc2208ff3d61374_MD5.png" alt="inline">按钮，直接输入ocean。选择 Water Body Ocean，将其拖到场景中。这样我们就创建了一个小岛屿。</li>
+<li>按 Shift 1 回到普通模式。</li>
+<li>再次通过快速添加，在场景中添加玩家出生点。如果出生点不在地面上，可以按 End 键让出生点放置在地面上。</li>
+<li>将 ALS 插件 ALS &gt; ALSExtras &gt; Core 中的 B_Als_GameMode 和 B_Als_PlayerController 拷贝一份到项目中并重命名为 NewGameMode和NewPlayerController。</li>
+<li>打开 窗口 &gt;世界环境设置。将游戏模式重载设置为 NewGameMode。此时运行游戏就可以控制角色在场景中奔跑了，但控制器依然插件里默认的控制器。</li>
+<li>设置游戏模式的玩家控制器。双击新的游戏模式文件，并将玩家控制器类设置为拷贝的新控制器NewPlayerController。</li>
+</ol>
+<span id="more"></span>
+<h2 id="如何更换模型"><a href="#如何更换模型" class="headerlink" title="如何更换模型"></a>如何更换模型</h2><h3 id="绑定好的模型"><a href="#绑定好的模型" class="headerlink" title="绑定好的模型"></a>绑定好的模型</h3><ol>
+<li>如果想更改模型，可以拷贝 ALS &gt; Character 中的 B_Als_Character 到工程中，双击该蓝图在右边找到骨骼网格体资产选择想要替换的模型， 然后将游戏模式中的默认pawn类设置为拷贝后的蓝图。</li>
+</ol>
+<h3 id="MMD模型"><a href="#MMD模型" class="headerlink" title="MMD模型"></a>MMD模型</h3><ol>
+<li>参考<a href="UE5%20%E4%B8%AD%E5%AF%BC%E5%85%A5%20PMX%20%E6%A8%A1%E5%9E%8B%E8%87%AA%E5%8A%A8%E9%AA%A8%E9%AA%BC%E9%87%8D%E5%AE%9A%E5%90%91.md">UE5 中导入 PMX 模型自动骨骼重定向</a>导入PMX模型。</li>
+<li>需要 Mannequin 模型作为动画重定向的源，若工程中无，需要在内容浏览器中右键菜单中最上方选择 添加功能和内容包 &gt; 第三人称游戏 添加到工程中。</li>
+<li>如果导入的MMD模型的姿势为 T-pose 或 A-pose，则需要给源模型添加 T-Pose 姿势作为参考。打开  <code>Characters/Mannequins/Animations/Manny/MM_T_Pose</code> 动画资源，选择右上角的 创建资产 &gt; 创建姿势资产 &gt; 当前姿势 并保存。</li>
+<li>找到导入的 IK重定向器（名字为 RTG_&lt;模型名&gt;）并打开。选择 源IKRig资产 为 IK_Mannequin，目标IKRig资产 为 IK_&lt;模型名&gt;_Mannequin 。</li>
+<li>在左上角找到重定向姿势，选择 源 &gt; 创建 &gt; 从姿势资产导入 刚刚保存的 T-pose 姿势资产。此时源 Mannequin 就会变为 T-pose 了。</li>
+<li>参考<a href="UE5%20%E5%8A%A8%E7%94%BB%E9%87%8D%E5%AE%9A%E5%90%91.md">UE5 动画重定向</a>，从第 6 步开始，对 pose 进行对齐，并完成重定向动画的导出。</li>
+</ol>
+<h3 id="FBX模型"><a href="#FBX模型" class="headerlink" title="FBX模型"></a>FBX模型</h3>
+    </div>
+    
+    
+    
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+                <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 LunarEclipse&#39;s Home
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Lunar Eclipse
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+            </div>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: "1b257199da39cd021fa4",
+        clientSecret: "03478a1dd851368fe32a4eea9483c00ce041e3a2",
+        repo: "949886.github.io",
+        owner: "949886",
+        admin: "949886".split(","),
+        language: "zh-CN",
+        id: location.pathname,
+        
+        proxy: "https://twodimensions.herokuapp.com/https://github.com/login/oauth/access_token",
+        
+    })
+    gitalk.render("gitalk-container");
+</script>
+
+
+
+
+        
+    </body>
+</html>
