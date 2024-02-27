@@ -7,7 +7,7 @@ uniform float bFlat;
 
 const vec3 lightPos 	= vec3(200,60,100);
 const vec3 ambientColor = vec3(0.2, 0.0, 0.0);
-const vec3 diffuseColor = vec3(0.5, 0.0, 0.0);
+const vec3 diffuseColor = vec3(0.0, 0.5, 0.0);
 const vec3 specColor 	= vec3(1.0, 1.0, 1.0);
 
 void main() {
