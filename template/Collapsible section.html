@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Archives | LunarEclipse&#39;s Home</title>
+        <title> | LunarEclipse&#39;s Home</title>
         <meta name="author" content="Lunar Eclipse" />
         <meta name="description" content="" />
         <meta name="keywords" content="" />
@@ -30,6 +30,13 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="https://cdn.staticfile.org/gitalk/1.8.0/gitalk.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.8.0/gitalk.min.css" />
 
 
 
@@ -152,54 +159,46 @@
 </transition>
 
             <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-                
-<div id="archives">
-    
-    <div id="timeline-wrap" ref="timeline">
+                <div class="article">
+    <div>
+        <h1></h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/4/15
+        </span>
         
-        <div class="timeline" data-title="helloworld">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2023/9/10</div>
-                <a href="/2023/09/10/hello-world/">
-                    <h3>Hello World</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="test">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2023/9/10</div>
-                <a href="/2023/09/10/test/">
-                    <h3>Test</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="glslloadingshadersinflutter">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/5/24</div>
-                <a href="/2024/05/24/2024/GLSL%20Loading%20Shaders%20in%20Flutter/">
-                    <h3>GLSL Loading Shaders in Flutter</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
         
     </div>
+    
+    <div class="content" v-pre>
+        <details><summary>Click me</summary>
+  ### Heading
+  1. Foo
+  2. Bar
+     * Baz
+     * Qux
+
+<h3 id="Some-Javascript"><a href="#Some-Javascript" class="headerlink" title="Some Javascript"></a>Some Javascript</h3><pre><code class="js">function logSomething(something) &#123;
+  console.log(&#39;Something&#39;, something);
+&#125;
+</code></pre>
+</details>
+    </div>
+    
+    
+    
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
+    
+    
+    
 </div>
 
                 <footer id="footer">
@@ -230,6 +229,28 @@
             
         </div>
         <script src="/js/main.js"></script>
+        
+        
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: "1b257199da39cd021fa4",
+        clientSecret: "03478a1dd851368fe32a4eea9483c00ce041e3a2",
+        repo: "949886.github.io",
+        owner: "949886",
+        admin: "949886".split(","),
+        language: "zh-CN",
+        id: location.pathname,
+        
+        proxy: "https://twodimensions.herokuapp.com/https://github.com/login/oauth/access_token",
+        
+    })
+    gitalk.render("gitalk-container");
+</script>
+
+
+
+
         
     </body>
 </html>
