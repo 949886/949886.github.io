@@ -50,6 +50,7 @@
 <!-- Custom -->
 
 <link rel="stylesheet" href="/css/custom.css" />
+<script src="/js/custom.js" defer></script>
 
 <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
 <canvas id="fireworks" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647"></canvas>
@@ -327,7 +328,7 @@ mjx-container[display="true"] + br {
     <div class="description">
         <div class="content" v-pre>
             
-            <iframe width="100%" id="godot"  src="https://www.lunareclipse.cc/Games/" scrolling="no" frameBorder="0" allowfullscreen style="aspect-ratio: 16/9; width: 100%;"></iframe>
+            <iframe width="100%" id="godot"  src="https://www.lunareclipse.cc/Games/" scrolling="no" frameBorder="0" allowfullscreen style="aspect-ratio: 16/9; width: 100%;" onload="onLoadHandler();"></iframe>
 
 <p><button type="button" onclick="godot.changeExpression('happy')">😇</button> <button type="button" onclick="godot.changeExpression('angry')">😡</button> <button type="button" onclick="godot.changeExpression('angry')">😝</button> <button type="button" onclick="godot.changeExpression('angry')">🤤</button></p>
 <p>Emoji をクリックして、アロナちゃんの表情を変えよう！</p>
@@ -467,8 +468,11 @@ static func remove_callback(js_name: String) -&gt; void:
 <pre><code class="js">var godot = document.getElementById(&quot;godot&quot;).contentWindow.godot;
 </code></pre>
 <p>を使って、Godot 側の <code>godot</code> オブジェクトにアクセスできます。</p>
-<script>
-var godot = document.getElementById("godot").contentWindow.godot;
+<script defer>
+function onLoadHandler() {
+    godot = document.getElementById("godot").contentWindow.godot;
+    console.log("godot", godot);
+}
 </script>
             
         </div>
@@ -483,7 +487,7 @@ var godot = document.getElementById("godot").contentWindow.godot;
         
         <span class="tag">
             
-            <a href="/tags/Godot/" style="color: #ffa2c4">Godot</a>
+            <a href="/tags/Godot/" style="color: #03a9f4">Godot</a>
         </span>
         
     </div>
