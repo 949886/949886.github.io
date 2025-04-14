@@ -196,7 +196,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Godot/" style="color: #ffa2c4">
+                <a href="/tags/Godot/" style="color: #00a596">
                     Godot
                 </a>
             </span>
@@ -208,7 +208,7 @@
     <div class="content" v-pre>
         <iframe width="100%" id="godot"  src="https://www.lunareclipse.cc/Games/" scrolling="no" frameBorder="0" allowfullscreen style="aspect-ratio: 16/9; width: 100%;" onload="onLoadHandler();"></iframe>
 
-<p><button type="button" onclick="godot.changeExpression('happy')">😇</button> <button type="button" onclick="godot.changeExpression('angry')">😡</button> <button type="button" onclick="godot.changeExpression('angry')">😝</button> <button type="button" onclick="godot.changeExpression('angry')">🤤</button></p>
+<p><button type="button" onclick="godot.changeExpression('normal')">🙂</button> <button type="button" onclick="godot.changeExpression('happy')">😇</button> <button type="button" onclick="godot.changeExpression('angry')">😡</button> <button type="button" onclick="godot.changeExpression('> <')">😝</button> <button type="button" onclick="godot.changeExpression('angry')">🤤</button> <button type="button" onclick="godot.changeExpression('o')">😯</button> <button type="button" onclick="godot.changeExpression('embarrassed')">😦</button> <button type="button" onclick="godot.changeExpression('osorosiko')">😨</button> <button type="button" onclick="godot.changeExpression('donbiki')">😰</button> <button type="button" onclick="godot.changeExpression('sigh')">😮‍💨</button> <button type="button" onclick="godot.changeExpression('--')">😌</button></p>
 <p>Emoji をクリックして、アロナちゃんの表情を変えよう！</p>
 <br>
 
@@ -347,9 +347,9 @@ static func remove_callback(js_name: String) -&gt; void:
 </code></pre>
 <p>を使って、Godot 側の <code>godot</code> オブジェクトにアクセスできます。</p>
 <script defer>
+var godot = document.getElementById("godot").contentWindow.godot;
 function onLoadHandler() {
-    godot = document.getElementById("godot").contentWindow.godot;
-    console.log("godot", godot);
+    console.log(godot);
 }
 </script>
     </div>
