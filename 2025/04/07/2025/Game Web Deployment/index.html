@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Game Web Deployment &amp; JS integration | LunarEclipse&#39;s Home</title>
+    <meta name="author" content="Lunar Eclipse" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.png" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.css" />
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+
+<!-- Custom -->
+
+<link rel="stylesheet" href="/css/custom.css" />
+
+<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+<canvas id="fireworks" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647"></canvas>
+<script src="/js/fireworks.js"></script>
+<canvas id="background" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"></canvas>
+<script src="/js/background.js"></script>
+<script src="/js/pocket.gl.min.js"></script>
+
+
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/languages/dart.min.js"></script>
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/languages/gdscript.min.js"></script>
+<script>hljs.registerLanguage("gdscript",function(){"use strict";var e=e||{};function r(e){return{aliases:["godot","gdscript"],keywords:{keyword:"and in not or self void as assert breakpoint class class_name extends is func setget signal tool yield const enum export onready static var break continue if elif else for pass return match while remote sync master puppet remotesync mastersync puppetsync",built_in:"Color8 ColorN abs acos asin atan atan2 bytes2var cartesian2polar ceil char clamp convert cos cosh db2linear decimals dectime deg2rad dict2inst ease exp floor fmod fposmod funcref get_stack hash inst2dict instance_from_id inverse_lerp is_equal_approx is_inf is_instance_valid is_nan is_zero_approx len lerp lerp_angle linear2db load log max min move_toward nearest_po2 ord parse_json polar2cartesian posmod pow preload print_stack push_error push_warning rad2deg rand_range rand_seed randf randi randomize range_lerp round seed sign sin sinh smoothstep sqrt step_decimals stepify str str2var tan tanh to_json type_exists typeof validate_json var2bytes var2str weakref wrapf wrapi bool int float String NodePath Vector2 Rect2 Transform2D Vector3 Rect3 Plane Quat Basis Transform Color RID Object NodePath Dictionary Array PoolByteArray PoolIntArray PoolRealArray PoolStringArray PoolVector2Array PoolVector3Array PoolColorArray",literal:"true false null"},contains:[e.NUMBER_MODE,e.HASH_COMMENT_MODE,{className:"comment",begin:/"""/,end:/"""/},e.QUOTE_STRING_MODE,{variants:[{className:"function",beginKeywords:"func"},{className:"class",beginKeywords:"class"}],end:/:/,contains:[e.UNDERSCORE_TITLE_MODE]}]}}return e.exports=function(e){e.registerLanguage("gdscript",r)},e.exports.definer=r,e.exports.definer||e.exports}());</script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>LUNARECLIPSE&#39;S HOME</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LUNARECLIPSE&#39;S HOME</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Game Web Deployment &amp; JS integration</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/4/7
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/Godot/" style="color: #03a9f4">
+                    Godot
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <iframe width="100%" id="godot"  src="https://www.lunareclipse.cc/Games/" scrolling="no" frameBorder="0" allowfullscreen style="aspect-ratio: 16/9; width: 100%;"></iframe>
+
+<p><button type="button" onclick="godot.changeExpression('happy')">😇</button> <button type="button" onclick="godot.changeExpression('angry')">😡</button> <button type="button" onclick="godot.changeExpression('angry')">😝</button> <button type="button" onclick="godot.changeExpression('angry')">🤤</button></p>
+<p>Emoji をクリックして、アロナちゃんの表情を変えよう！</p>
+<br>
+
+<h2 id="目録"><a href="#目録" class="headerlink" title="目録"></a>目録</h2><ul>
+<li><a href="#%E7%9B%AE%E9%8C%B2">目録</a></li>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB">はじめに</a></li>
+<li><a href="#%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%92%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88">ゲームをエクスポート</a></li>
+<li><a href="#%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4">デプロイ</a><ul>
+<li><a href="#1-%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%A7%E8%B5%B7%E5%8B%95">1. ローカルサーバーで起動</a></li>
+<li><a href="#2-web-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AB%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89">2. Web サーバーにアップロード</a></li>
+<li><a href="#3-iframe-%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%92%E5%9F%8B%E3%82%81%E8%BE%BC%E3%82%80">3. iframe を使ってゲームを埋め込む</a></li>
+</ul>
+</li>
+<li><a href="#javascript-%E3%81%A8%E9%80%9A%E4%BF%A1">JavaScript と通信</a></li>
+</ul>
+<br>
+
+<h2 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h2><p>この文章は、Godot で作ったゲームを Web 上にデプロイする方法やゲームと JavaScript の間に通信する方法を説明します。</p>
+<br>
+
+<h2 id="ゲームをエクスポート"><a href="#ゲームをエクスポート" class="headerlink" title="ゲームをエクスポート"></a>ゲームをエクスポート</h2><p>Godot を使用して Web 上でゲームプロジェクトを配布することはかなり簡単です。<br>先ず、Godot 側でプロジェクトを出力します。この階段の説明は省略させていただきます。</p>
+<p>出力したものは以下のようになります：</p>
+<details><summary>Output detail 展開</summary>
+<div>
+
+<p>output&#x2F;<br>├─ libspine_godot.web.template_release.wasm32.nothreads.wasm<br>├─ game.apple-touch-icon.png<br>├─ game.audio.position.worklet.js<br>├─ game.audio.worklet.js<br>├─ game.icon.png<br>├─ game.js<br>├─ game.pck<br>├─ game.png<br>├─ game.side.wasm<br>├─ game.wasm<br>└─ game.html</p>
+</div>
+</details>
+
+<p><strong>Note</strong>: Web に表示するために、html ファイルの名前を <code>index.html</code> に変更する必要があります。</p>
+<br>
+
+<h2 id="デプロイ"><a href="#デプロイ" class="headerlink" title="デプロイ"></a>デプロイ</h2><h4 id="1-ローカルサーバーで起動"><a href="#1-ローカルサーバーで起動" class="headerlink" title="1. ローカルサーバーで起動"></a>1. ローカルサーバーで起動</h4><ol>
+<li><a target="_blank" rel="noopener" href="https://nodejs.org/">Node.js</a> をインストールします。</li>
+<li>command line (windows では ctrl + R で <code>cmd</code> を入力して実行) <code>cd &lt;path&gt;</code> で出力したフォルダに移動します。</li>
+<li><code>npx http-server</code> を実行して、ローカルサーバーを起動します。</li>
+</ol>
+<h4 id="2-Web-サーバーにアップロード"><a href="#2-Web-サーバーにアップロード" class="headerlink" title="2. Web サーバーにアップロード"></a>2. Web サーバーにアップロード</h4><p>これから GitHub Pages を例に説明します。他のサーバーでも似たような機能があると思います。</p>
+<ol>
+<li>先ず、<a target="_blank" rel="noopener" href="https://docs.github.com/ja/pages/quickstart">GitHub Pagesのクイックスタート</a> の手順に従って、GitHub Pages の初期化を行います。<br>要するに、&lt;username&gt;.github.io というリポジトリを作成して、そこに <code>index.html</code> をアップロードしたら、<a href="">https:&#x2F;&#x2F;&lt;username&gt;.github.io&#x2F;</a> というサイトにアクセスできるようになります。</li>
+<li>[Optional] <img src="/media/Pasted%20image%2020250415022040.png" alt="fr 50%">GitHub Pages は複数のリポジトリに対応できますから、Game 専用ページを作りたいなら、新しいリポジトリを作成し、Settings &gt; Pages &gt; Branch で main を選択して保存。そして、新しいページの URL は <a href="">https:&#x2F;&#x2F;&lt;username&gt;.github.io&#x2F;&lt;repo&gt;&#x2F;</a> になります。</li>
+<li>ゲームなら、すべてのファイル (.html、.wasm、.pck、.js …) をアップロードすると、上記の URL でプレイできるようになります。</li>
+</ol>
+<!-- 1. Github desktop
+
+    1. GitHub Desktop をインストールします。
+    2. `File` > `Add local repository` で、出力したフォルダを選択します。
+    3. `Publish repository` をクリックして、GitHub にアップロードします。 
+
+1. Git bash
+
+    ``` bash
+    cd <game-path>
+    git init
+    git remote add origin https://github.com/<username>/<repo>.git
+    git add .
+    git commit -m "Initial commit"
+    git push -u origin master
+    ``` 
+-->
+
+<p>おまけに、Cloudflare を一緒に使用して、独自のドメインを設定することもできます。文章の長さゆえに、ここでは省略させていただきます。具体的な内容は、<a target="_blank" rel="noopener" href="https://docs.github.com/ja/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages">カスタムドメインとGitHub Pagesについて</a> と <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/registrar/get-started/register-domain/">Register a new domain · Cloudflare</a> を参照してください。</p>
+<p><a target="_blank" rel="noopener" href="https://www.lunareclipse.cc/Games/">https://www.lunareclipse.cc/Games/</a> にアクセスして、冒頭のデモをプレイできます。</p>
+<h4 id="3-iframe-を使ってゲームを埋め込む"><a href="#3-iframe-を使ってゲームを埋め込む" class="headerlink" title="3. iframe を使ってゲームを埋め込む"></a>3. iframe を使ってゲームを埋め込む</h4><p>もしこのブログみたいに、ほかの Web ページにゲームを埋め込みたいなら、以下のように iframe を html コードに追加して、ゲームを埋め込むことができます。</p>
+<pre><code class="html">&lt;iframe id=&quot;godot&quot; 
+    src=&quot;https://www.lunareclipse.cc/Games/&quot; 
+    scrolling=&quot;no&quot; 
+    frameBorder=&quot;0&quot; 
+    allowfullscreen 
+    style=&quot;width: 100%; max-width: 100%; aspect-ratio: 16/9;&quot;&gt;
+&lt;/iframe&gt;
+</code></pre>
+<br>
+
+<h2 id="JavaScript-と通信"><a href="#JavaScript-と通信" class="headerlink" title="JavaScript と通信"></a>JavaScript と通信</h2><p>先ず、Godot 側で <code>JavaScriptBridge.eval()</code> を使用して、JavaScript 側に <code>godot</code> という名前のグローバルオブジェクトを作成します。</p>
+<pre><code class="gdscript">JavaScriptBridge.eval(&quot;&quot;&quot;  
+var godot = &#123; &#125;;  
+&quot;&quot;&quot;, true)
+</code></pre>
+<p>そして、このオブジェクトに <code>changeExpression</code> というメソッドを追加して、Godot 側の <code>arona.set_expression()</code> メソッドにリンクします。</p>
+<details><summary>class JS</summary>
+<div>
+
+<pre><code class="gdscript">class_name JS extends Node  
+  
+static var godot: JavaScriptObject # JavaScript Bridge  
+static var callbacks: Dictionary[String, JavaScriptObject] = &#123;&#125;  
+  
+static func _static_init():  
+    if not OS.has_feature(&quot;web&quot;):  
+       print(&quot;JavaScript is not supported on this platform.&quot;)  
+       return  
+  
+    JavaScriptBridge.eval(&quot;&quot;&quot;  
+var godot = &#123;  
+  
+&#125;;  
+&quot;&quot;&quot;, true)  
+  
+    godot = JavaScriptBridge.get_interface(&quot;godot&quot;)  
+    print(&quot;[JS] Godot bridge initialized.&quot;)  
+  
+static func add_callback(function: Callable, js_name: String = &quot;&quot;) -&gt; void:  
+    if js_name in callbacks:  
+       print(&quot;[JS] Callback already exists.&quot;)  
+       return  
+       var callback_ref: JavaScriptObject = JavaScriptBridge.create_callback(function.callv)  
+    if callback_ref == null:  
+       print(&quot;[JS] Failed to create callback.&quot;)  
+       return  
+  
+    if js_name.is_empty():  
+       js_name = function.get_method().get_basename()      
+  
+    callbacks[js_name] = callback_ref  
+    godot.set(js_name, callback_ref)  
+  
+static func remove_callback(js_name: String) -&gt; void:  
+    if js_name in callbacks:  
+       godot.set(js_name, null)  
+       callbacks[js_name].free()  
+       callbacks.erase(js_name)  
+    else:  
+       print(&quot;[JS] Callback not found.&quot;)
+</code></pre>
+</div>
+</details>
+
+<pre><code class="gdscript">JS.add_callback(arona.set_expression, &quot;changeExpression&quot;)
+</code></pre>
+<p>これで、JavaScript 側で <code>godot.changeExpression()</code> を呼び出すと、Godot 側の <code>arona.set_expression()</code> が呼び出されます。</p>
+<pre><code class="js">godot.changeExpression(&#39;happy&#39;)
+</code></pre>
+<p><button class="button-77" role="button" height="50px" width="50px"  onclick="godot.changeExpression('happy')" style="float: right;">Run</button><br><br><br>iframe を使った場合、JavaScript 側で </p>
+<pre><code class="js">var godot = document.getElementById(&quot;godot&quot;).contentWindow.godot;
+</code></pre>
+<p>を使って、Godot 側の <code>godot</code> オブジェクトにアクセスできます。</p>
+<script>
+var godot = document.getElementById("godot").contentWindow.godot;
+</script>
+    </div>
+    
+    
+    
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 LunarEclipse&#39;s Home
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Lunar Eclipse
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: "1b257199da39cd021fa4",
+        clientSecret: "03478a1dd851368fe32a4eea9483c00ce041e3a2",
+        repo: "949886.github.io",
+        owner: "949886",
+        admin: "949886".split(","),
+        language: "zh-CN",
+        id: location.pathname,
+        
+    })
+    gitalk.render("gitalk-container");
+</script>
+
+
+
+
+    
+</body>
+</html>

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Godot Web Deployment | LunarEclipse&#39;s Home</title>
+    <title>Tags: Godot | LunarEclipse&#39;s Home</title>
     <meta name="author" content="Lunar Eclipse" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -42,23 +42,24 @@
 
 
 
-<script src="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.js"></script>
-<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.css" />
-
-
-
-
-
 <link rel="stylesheet" href="/css/main.css" />
-<link rel="stylesheet" href="/css/custom.css" />
+
 
 <!-- Custom -->
+
+<link rel="stylesheet" href="/css/custom.css" />
+
 <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
 <canvas id="fireworks" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647"></canvas>
 <script src="/js/fireworks.js"></script>
 <canvas id="background" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"></canvas>
 <script src="/js/background.js"></script>
 <script src="/js/pocket.gl.min.js"></script>
+
+
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/languages/dart.min.js"></script>
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/languages/gdscript.min.js"></script>
+<script>hljs.registerLanguage("gdscript",function(){"use strict";var e=e||{};function r(e){return{aliases:["godot","gdscript"],keywords:{keyword:"and in not or self void as assert breakpoint class class_name extends is func setget signal tool yield const enum export onready static var break continue if elif else for pass return match while remote sync master puppet remotesync mastersync puppetsync",built_in:"Color8 ColorN abs acos asin atan atan2 bytes2var cartesian2polar ceil char clamp convert cos cosh db2linear decimals dectime deg2rad dict2inst ease exp floor fmod fposmod funcref get_stack hash inst2dict instance_from_id inverse_lerp is_equal_approx is_inf is_instance_valid is_nan is_zero_approx len lerp lerp_angle linear2db load log max min move_toward nearest_po2 ord parse_json polar2cartesian posmod pow preload print_stack push_error push_warning rad2deg rand_range rand_seed randf randi randomize range_lerp round seed sign sin sinh smoothstep sqrt step_decimals stepify str str2var tan tanh to_json type_exists typeof validate_json var2bytes var2str weakref wrapf wrapi bool int float String NodePath Vector2 Rect2 Transform2D Vector3 Rect3 Plane Quat Basis Transform Color RID Object NodePath Dictionary Array PoolByteArray PoolIntArray PoolRealArray PoolStringArray PoolVector2Array PoolVector3Array PoolColorArray",literal:"true false null"},contains:[e.NUMBER_MODE,e.HASH_COMMENT_MODE,{className:"comment",begin:/"""/,end:/"""/},e.QUOTE_STRING_MODE,{variants:[{className:"function",beginKeywords:"func"},{className:"class",beginKeywords:"class"}],end:/:/,contains:[e.UNDERSCORE_TITLE_MODE]}]}}return e.exports=function(e){e.registerLanguage("gdscript",r)},e.exports.definer=r,e.exports.definer||e.exports}());</script>
 
 <meta name="generator" content="Hexo 6.3.0"></head>
 <body>
@@ -166,36 +167,54 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>Godot Web Deployment</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/4/7
+            <div id="archives">
+    
+    <div class="categories-tags">
+        
+        
+        
+        <span>
+            <a href="/tags/Godot/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Godot
+            </a>
         </span>
         
         
+        
+        
     </div>
     
-    <div class="content" v-pre>
-        <iframe width="100%" height="540px" id="godot"  src="https://www.lunareclipse.cc/Games/" scrolling="no" frameBorder="0" style="max-width: 100%;" allowfullscreen allow="cross-origin-isolated"></iframe>
-
-
+    <div class="timeline">
+        <div class="timeline-tail"></div>
+        <div class="timeline-content">
+            <div class="item-time">2025/4/7</div>
+            <a href="/2025/04/07/2025/Game%20Web%20Deployment/">
+                <h3>Game Web Deployment &amp; JS integration</h3>
+            </a>
+            <div class="info">
+                
+                
+                <span class="tags">
+                    <span class="icon">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </span>
+                    
+                    
+                    <span class="tag">
+                        
+                        <a href="/tags/Godot/" style="color: #00bcd4">
+                            Godot
+                        </a>
+                    </span>
+                    
+                </span>
+                
+            </div>
+        </div>
     </div>
-    
-    
-    
-    <div id="comment">
-        <div id="gitalk-container"></div>
-    </div>
-    
-    
-    
-    
     
 </div>
 
@@ -227,26 +246,6 @@
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-<script>
-    const gitalk = new Gitalk({
-        clientID: "1b257199da39cd021fa4",
-        clientSecret: "03478a1dd851368fe32a4eea9483c00ce041e3a2",
-        repo: "949886.github.io",
-        owner: "949886",
-        admin: "949886".split(","),
-        language: "zh-CN",
-        id: location.pathname,
-        
-    })
-    gitalk.render("gitalk-container");
-</script>
-
-
-
-
     
 </body>
 </html>
