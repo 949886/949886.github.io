@@ -344,7 +344,10 @@ mjx-container[display="true"] + br {
 <li><a href="#3-iframe-%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%92%E5%9F%8B%E3%82%81%E8%BE%BC%E3%82%80">3. iframe を使ってゲームを埋め込む</a></li>
 </ul>
 </li>
-<li><a href="#javascript-%E3%81%A8%E9%80%9A%E4%BF%A1">JavaScript と通信</a></li>
+<li><a href="#javascript-%E3%81%A8%E9%80%9A%E4%BF%A1">JavaScript と通信</a><ul>
+<li><a href="#iframe-%E3%82%92%E4%BD%BF%E3%81%86">iframe を使う</a></li>
+</ul>
+</li>
 </ul>
 <br>
 
@@ -464,8 +467,10 @@ static func remove_callback(js_name: String) -&gt; void:
 <p>これで、JavaScript 側で <code>godot.changeExpression()</code> を呼び出すと、Godot 側の <code>arona.set_expression()</code> が呼び出されます。</p>
 <pre><code class="js">godot.changeExpression(&#39;happy&#39;)
 </code></pre>
-<p><button class="button-77" role="button" height="50px" width="50px"  onclick="godot.changeExpression('happy')" style="float: right;">Run</button><br><br></p>
-<p>iframe を使った場合、iframe に <code>onload=&quot;onIframeLoaded();&quot;</code> イベントを追加して：</p>
+<p><a target="_blank" rel="noopener" href="https://www.lunareclipse.cc/Games/">Game</a> ページでアドレスバーをクリックして、Ctrl+Shift+C を押して DevTools を開いて、Console に上記のコードを入力したら、Emoji をクリックすると同じようにアロナちゃんの表情が変わるはずです。</p>
+<br>
+
+<h4 id="iframe-を使う"><a href="#iframe-を使う" class="headerlink" title="iframe を使う"></a>iframe を使う</h4><p>iframe を使った場合、iframe に <code>onload=&quot;onIframeLoaded();&quot;</code> イベントを追加して：</p>
 <pre><code class="html">&lt;iframe id=&quot;game&quot; 
     src=&quot;https://www.lunareclipse.cc/Games/&quot; 
     scrolling=&quot;no&quot; 
@@ -477,14 +482,21 @@ static func remove_callback(js_name: String) -&gt; void:
 
 &lt;script&gt;
 function onIframeLoaded() &#123;
-    godot = document.getElementById(&quot;game&quot;).contentWindow.godot;
+    game = document.getElementById(&quot;game&quot;);
+    godot = game.contentWindow.godot;
 &#125;
 &lt;/script&gt;
 </code></pre>
 <p>こうやて、iframe が読み込まれたときに Godot 側の <code>godot</code> オブジェクトにアクセスできます。</p>
+<p><strong>iframe を全画面表示</strong></p>
+<p>先ほどの <code>game</code> 変数を使って、以下のコードで iframe を全画面表示できます。</p>
+<pre><code class="js">game.requestFullscreen();
+</code></pre>
+<p><button class="button-77" role="button" height="50px" width="50px" onclick="game.requestFullscreen();">全画面表示</button></p>
 <script>
 function onIframeLoaded() {
-  godot = document.getElementById("game").contentWindow.godot;
+  game = document.getElementById("game")
+  godot = game.contentWindow.godot;
 }
 </script>
 
@@ -501,7 +513,7 @@ function onIframeLoaded() {
         
         <span class="tag">
             
-            <a href="/tags/Godot/" style="color: #ffa2c4">Godot</a>
+            <a href="/tags/Godot/" style="color: #ff7d73">Godot</a>
         </span>
         
     </div>
