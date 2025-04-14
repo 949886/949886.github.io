@@ -196,7 +196,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Godot/" style="color: #ffa2c4">
+                <a href="/tags/Godot/" style="color: #00a596">
                     Godot
                 </a>
             </span>
@@ -346,11 +346,13 @@ static func remove_callback(js_name: String) -&gt; void:
 <pre><code class="js">var godot = document.getElementById(&quot;game&quot;).contentWindow.godot;
 </code></pre>
 <p>を使って、Godot 側の <code>godot</code> オブジェクトにアクセスできます。</p>
-<script>
+<script defer>
 console.log("godot", document.getElementById("game").contentWindow.godot);
+</script>
+
+<script>
 function onIframeLoaded() {
-  var godot = document.getElementById("game").contentWindow.godot;
-  console.log(godot);
+  godot = document.getElementById("game").contentWindow.godot;
 }
 </script>
     </div>
