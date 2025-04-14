@@ -196,7 +196,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Godot/" style="color: #00a596">
+                <a href="/tags/Godot/" style="color: #ffa2c4">
                     Godot
                 </a>
             </span>
@@ -273,7 +273,7 @@
 <p>おまけに、Cloudflare を一緒に使用して、独自のドメインを設定することもできます。文章の長さゆえに、ここでは省略させていただきます。具体的な内容は、<a target="_blank" rel="noopener" href="https://docs.github.com/ja/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages">カスタムドメインとGitHub Pagesについて</a> と <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/registrar/get-started/register-domain/">Register a new domain · Cloudflare</a> を参照してください。</p>
 <p><a target="_blank" rel="noopener" href="https://www.lunareclipse.cc/Games/">https://www.lunareclipse.cc/Games/</a> にアクセスして、冒頭のデモをプレイできます。</p>
 <h4 id="3-iframe-を使ってゲームを埋め込む"><a href="#3-iframe-を使ってゲームを埋め込む" class="headerlink" title="3. iframe を使ってゲームを埋め込む"></a>3. iframe を使ってゲームを埋め込む</h4><p>もしこのブログみたいに、ほかの Web ページにゲームを埋め込みたいなら、以下のように iframe を html コードに追加して、ゲームを埋め込むことができます。</p>
-<pre><code class="html">&lt;iframe id=&quot;godot&quot; 
+<pre><code class="html">&lt;iframe id=&quot;game&quot; 
     src=&quot;https://www.lunareclipse.cc/Games/&quot; 
     scrolling=&quot;no&quot; 
     frameBorder=&quot;0&quot; 
@@ -343,7 +343,7 @@ static func remove_callback(js_name: String) -&gt; void:
 <pre><code class="js">godot.changeExpression(&#39;happy&#39;)
 </code></pre>
 <p><button class="button-77" role="button" height="50px" width="50px"  onclick="godot.changeExpression('happy')" style="float: right;">Run</button><br><br><br>iframe を使った場合、JavaScript 側で </p>
-<pre><code class="js">var godot = document.getElementById(&quot;godot&quot;).contentWindow.godot;
+<pre><code class="js">var godot = document.getElementById(&quot;game&quot;).contentWindow.godot;
 </code></pre>
 <p>を使って、Godot 側の <code>godot</code> オブジェクトにアクセスできます。</p>
 <script>
