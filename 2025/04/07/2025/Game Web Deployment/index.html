@@ -196,7 +196,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Godot/" style="color: #ffa2c4">
+                <a href="/tags/Godot/" style="color: #00a596">
                     Godot
                 </a>
             </span>
@@ -342,10 +342,24 @@ static func remove_callback(js_name: String) -&gt; void:
 <p>これで、JavaScript 側で <code>godot.changeExpression()</code> を呼び出すと、Godot 側の <code>arona.set_expression()</code> が呼び出されます。</p>
 <pre><code class="js">godot.changeExpression(&#39;happy&#39;)
 </code></pre>
-<p><button class="button-77" role="button" height="50px" width="50px"  onclick="godot.changeExpression('happy')" style="float: right;">Run</button><br><br><br>iframe を使った場合、JavaScript 側で </p>
-<pre><code class="js">var godot = document.getElementById(&quot;game&quot;).contentWindow.godot;
+<p><button class="button-77" role="button" height="50px" width="50px"  onclick="godot.changeExpression('happy')" style="float: right;">Run</button><br><br></p>
+<p>iframe を使った場合、iframe に <code>onload=&quot;onIframeLoaded();&quot;</code> イベントを追加して：</p>
+<pre><code class="html">&lt;iframe id=&quot;game&quot; 
+    src=&quot;https://www.lunareclipse.cc/Games/&quot; 
+    scrolling=&quot;no&quot; 
+    frameBorder=&quot;0&quot; 
+    allowfullscreen 
+    onload=&quot;onIframeLoaded();&quot; 
+    style=&quot;width: 100%; max-width: 100%; aspect-ratio: 16/9;&quot;&gt;
+&lt;/iframe&gt;
+
+&lt;script&gt;
+function onIframeLoaded() &#123;
+    godot = document.getElementById(&quot;game&quot;).contentWindow.godot;
+&#125;
+&lt;/script&gt;
 </code></pre>
-<p>を使って、Godot 側の <code>godot</code> オブジェクトにアクセスできます。</p>
+<p>こうやて、iframe が読み込まれたときに Godot 側の <code>godot</code> オブジェクトにアクセスできます。</p>
 <script>
 function onIframeLoaded() {
   godot = document.getElementById("game").contentWindow.godot;
