@@ -42,13 +42,6 @@
 
 
 
-<script src="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.js"></script>
-<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.css" />
-
-
-
-
-
 <link rel="stylesheet" href="/css/main.css" />
 
 
@@ -175,34 +168,34 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>tags</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/4/16
+            <div id="archives">
+    
+    <div class="categories-tags">
+        
+        
+        
+        <span>
+            <a href="/tags/Godot/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Godot
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/Flutter/" style="background: #00bcd4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Flutter
+            </a>
         </span>
         
         
     </div>
-    
-    <div class="content" v-pre>
-        
-    </div>
-    
-    
-    
-    <div id="comment">
-        <div id="gitalk-container"></div>
-    </div>
-    
-    
-    
-    
     
 </div>
 
@@ -234,27 +227,6 @@
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-<script>
-    console.log("gitalk path: ", decodeURI(location.pathname).substring(0, 50));
-    const gitalk = new Gitalk({
-        clientID: "1b257199da39cd021fa4",
-        clientSecret: "03478a1dd851368fe32a4eea9483c00ce041e3a2",
-        repo: "949886.github.io",
-        owner: "949886",
-        admin: "949886".split(","),
-        language: "en",
-        id: decodeURI(location.pathname),
-        
-    })
-    gitalk.render("gitalk-container");
-</script>
-
-
-
-
     
 </body>
 </html>
