@@ -196,7 +196,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Godot/" style="color: #ffa2c4">
+                <a href="/tags/Godot/" style="color: #03a9f4">
                     Godot
                 </a>
             </span>
@@ -210,6 +210,13 @@
 
 <p><button type="button" onclick="godot.changeExpression('normal')">🙂</button> <button type="button" onclick="godot.changeExpression('happy')">😇</button> <button type="button" onclick="godot.changeExpression('angry')">😡</button> <button type="button" onclick="godot.changeExpression('> <')">😝</button> <button type="button" onclick="godot.changeExpression('ehehe')">🤤</button> <button type="button" onclick="godot.changeExpression('o')">😯</button> <button type="button" onclick="godot.changeExpression('embarrassed')">😦</button> <button type="button" onclick="godot.changeExpression('donbiki')">😨</button> <button type="button" onclick="godot.changeExpression('sigh')">😮‍💨</button> <button type="button" onclick="godot.changeExpression('- -')">😌</button> <button type="button" onclick="godot.changeExpression('@ @')">😵‍💫</button> <button type="button" onclick="godot.changeExpression('star')">🤩</button> <button type="button" onclick="godot.changeExpression('o_o')">😱</button></p>
 <p>Emoji をクリックして、アロナちゃんの表情を変えよう！</p>
+<script>
+function onIframeLoaded() {
+  game = document.getElementById("game")
+  godot = game.contentWindow.godot;
+}
+</script>
+
 <span id="more"></span>
 
 <br>
@@ -373,12 +380,6 @@ function onIframeLoaded() &#123;
 <pre><code class="js">game.requestFullscreen();
 </code></pre>
 <p><button class="button-77" role="button" height="50px" width="50px" onclick="game.requestFullscreen();">全画面表示</button></p>
-<script>
-function onIframeLoaded() {
-  game = document.getElementById("game")
-  godot = game.contentWindow.godot;
-}
-</script>
 
     </div>
     
