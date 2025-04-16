@@ -196,7 +196,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Godot/" style="color: #ffa2c4">
+                <a href="/tags/Godot/" style="color: #03a9f4">
                     Godot
                 </a>
             </span>
@@ -210,6 +210,8 @@
 
 <p><button type="button" onclick="godot.changeExpression('normal')">🙂</button> <button type="button" onclick="godot.changeExpression('happy')">😇</button> <button type="button" onclick="godot.changeExpression('angry')">😡</button> <button type="button" onclick="godot.changeExpression('> <')">😝</button> <button type="button" onclick="godot.changeExpression('ehehe')">🤤</button> <button type="button" onclick="godot.changeExpression('o')">😯</button> <button type="button" onclick="godot.changeExpression('embarrassed')">😦</button> <button type="button" onclick="godot.changeExpression('donbiki')">😨</button> <button type="button" onclick="godot.changeExpression('sigh')">😮‍💨</button> <button type="button" onclick="godot.changeExpression('- -')">😌</button> <button type="button" onclick="godot.changeExpression('@ @')">😵‍💫</button> <button type="button" onclick="godot.changeExpression('star')">🤩</button> <button type="button" onclick="godot.changeExpression('o_o')">😱</button></p>
 <p>Emoji をクリックして、アロナちゃんの表情を変えよう！</p>
+<span id="more"></span>
+
 <br>
 
 <h2 id="目録"><a href="#目録" class="headerlink" title="目録"></a>目録</h2><ul>
@@ -424,14 +426,15 @@ function onIframeLoaded() {
     
 
 <script>
+    console.log("gitalk path: ", decodeURI(location.pathname).substring(0, 50));
     const gitalk = new Gitalk({
         clientID: "1b257199da39cd021fa4",
         clientSecret: "03478a1dd851368fe32a4eea9483c00ce041e3a2",
         repo: "949886.github.io",
         owner: "949886",
         admin: "949886".split(","),
-        language: "zh-CN",
-        id: location.pathname,
+        language: "en",
+        id: decodeURI(location.pathname),
         
     })
     gitalk.render("gitalk-container");

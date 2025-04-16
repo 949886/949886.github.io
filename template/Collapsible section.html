@@ -249,14 +249,15 @@
     
 
 <script>
+    console.log("gitalk path: ", decodeURI(location.pathname).substring(0, 50));
     const gitalk = new Gitalk({
         clientID: "1b257199da39cd021fa4",
         clientSecret: "03478a1dd851368fe32a4eea9483c00ce041e3a2",
         repo: "949886.github.io",
         owner: "949886",
         admin: "949886".split(","),
-        language: "zh-CN",
-        id: location.pathname,
+        language: "en",
+        id: decodeURI(location.pathname),
         
     })
     gitalk.render("gitalk-container");
