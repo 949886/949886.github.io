@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | LunarEclipse&#39;s Home</title>
+    <title>Unity Web Deployment | LunarEclipse&#39;s Home</title>
     <meta name="author" content="Lunar Eclipse" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -37,6 +37,13 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.css" />
 
 
 
@@ -168,127 +175,162 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Unity Web Deployment</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/4/22
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
             
-<div id="archives">
-    
-    <div id="timeline-wrap" ref="timeline">
-        
-        <div class="timeline" data-title="helloworld">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2023/9/10</div>
-                <a href="/2023/09/10/hello-world/">
-                    <h3>Hello World</h3>
+            
+            <span class="tag">
+                
+                <a href="/tags/Unity/" style="color: #ffa2c4">
+                    Unity
                 </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="test">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2023/9/10</div>
-                <a href="/2023/09/10/test/">
-                    <h3>Test</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="glslloadingshadersinflutter">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/5/2</div>
-                <a href="/2024/05/02/2024/GLSL%20Loading%20Shaders%20in%20Flutter/">
-                    <h3>GLSL Loading Shaders in Flutter</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/Flutter/" style="color: #00bcd4">
-                                Flutter
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="godotwebdeployment&jsinterop">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/4/7</div>
-                <a href="/2025/04/07/2025/Game%20Web%20Deployment/">
-                    <h3>Godot Web Deployment &amp; JS interop</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/Godot/" style="color: #ffa2c4">
-                                Godot
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="unitywebdeployment">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/4/22</div>
-                <a href="/2025/04/22/2025/Unity-Web-Deployment/">
-                    <h3>Unity Web Deployment</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/Unity/" style="color: #ffa2c4">
-                                Unity
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+            </span>
+            
+        </span>
         
     </div>
+    
+    <div class="content" v-pre>
+        <iframe width="100%" id="game" src="http://localhost:8080" scrolling="no" frameBorder="0" allowfullscreen style="aspect-ratio: 16/9; width: 100%;" allow="cross-origin-isolated" onload="onIframeLoaded();"></iframe>
+
+<h2 id="目録"><a href="#目録" class="headerlink" title="目録"></a>目録</h2><ul>
+<li><a href="#%E7%9B%AE%E9%8C%B2">目録</a></li>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB">はじめに</a></li>
+<li><a href="#%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%92%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88">ゲームをエクスポート</a></li>
+<li><a href="#%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4">デプロイ</a><ul>
+<li><a href="#streamingassets">StreamingAssets</a><ul>
+<li><a href="#cors-%E5%95%8F%E9%A1%8C">CORS 問題</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#javascript-%E3%81%A8%E9%80%9A%E4%BF%A1">JavaScript と通信</a><ul>
+<li><a href="#javascript-%E5%81%B4">JavaScript 側</a><ul>
+<li><a href="#c-%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%99">C# コードを呼び出す</a></li>
+</ul>
+</li>
+<li><a href="#unity-%E5%81%B4">Unity 側</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h2><h2 id="ゲームをエクスポート"><a href="#ゲームをエクスポート" class="headerlink" title="ゲームをエクスポート"></a>ゲームをエクスポート</h2><h2 id="デプロイ"><a href="#デプロイ" class="headerlink" title="デプロイ"></a>デプロイ</h2><h3 id="StreamingAssets"><a href="#StreamingAssets" class="headerlink" title="StreamingAssets"></a>StreamingAssets</h3><h4 id="CORS-問題"><a href="#CORS-問題" class="headerlink" title="CORS 問題"></a>CORS 問題</h4><p><font color="#d83931">webgl has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’</font></p>
+<p>以 Node.js 的 <a target="_blank" rel="noopener" href="https://github.com/http-party/http-server">http-server</a> 为例需要在命令后面加上 <code>--cors</code> 选项：</p>
+<pre><code class="bash">npx http-server --cors
+</code></pre>
+<p>以 <a target="_blank" rel="noopener" href="https://github.com/honojs/hono">Hono</a> 库为例</p>
+<pre><code class="ts">const app = new Hono&lt;&#123; Bindings: Bindings &#125;&gt;()
+app.use(&#39;*&#39;, cors())
+</code></pre>
+<h2 id="JavaScript-と通信"><a href="#JavaScript-と通信" class="headerlink" title="JavaScript と通信"></a>JavaScript と通信</h2><h3 id="JavaScript-側"><a href="#JavaScript-側" class="headerlink" title="JavaScript 側"></a>JavaScript 側</h3><h5 id="C-コードを呼び出す"><a href="#C-コードを呼び出す" class="headerlink" title="C# コードを呼び出す"></a>C# コードを呼び出す</h5><p>JavaScript 側で C# コードを呼び出すために、Unity を代表するインスタンスをグローバルスコープに公開する必要があります。<br><code>index.html</code> で <code>createUnityInstance</code> という関数を使用して、Unity インスタンスを獲得し、<code>unity</code> という名前のグローバルオブジェクトを作成します。</p>
+<pre><code class="js">var script = document.createElement(&quot;script&quot;);
+script.src = loaderUrl;
+script.onload = () =&gt; &#123;
+  createUnityInstance(canvas, config, (progress) =&gt; &#123;
+    progressBarFull.style.width = 100 * progress + &quot;%&quot;;
+  &#125;).then((unityInstance) =&gt; &#123;
+    unity = unityInstance; // &lt;----
+    loadingBar.style.display = &quot;none&quot;;
+  &#125;).catch((message) =&gt; &#123;
+    alert(message);
+  &#125;);
+&#125;;
+</code></pre>
+<p>これで、<code>SendMessage(objectName, methodName, value)</code> 方法を使用して、どこでも C# コードを呼び出すことができます。</p>
+<pre><code class="js">unity.SendMessage(&#39;MyGameObject&#39;, &#39;MyFunction&#39;);
+unity.SendMessage(&#39;MyGameObject&#39;, &#39;MyFunction&#39;, 5);
+unity.SendMessage(&#39;MyGameObject&#39;, &#39;MyFunction&#39;, &#39;MyString&#39;);
+</code></pre>
+<blockquote>
+<p>注意：<code>SendMessage</code> で呼び出す関数は、以下の制限があります：</p>
+<ul>
+<li>関数の引数の数は 0 または 1 でなければなりません。</li>
+<li>関数の引数は、<code>string</code> と数字のいずれかでなければなりません。</li>
+</ul>
+</blockquote>
+<h3 id="Unity-側"><a href="#Unity-側" class="headerlink" title="Unity 側"></a>Unity 側</h3><p><code>bridge.jslib</code> というファイルを作成して、JavaScript 側の関数を定義します。</p>
+<pre><code class="js">mergeInto(LibraryManager.library, &#123;  
+  Hello: function () &#123;  
+    alert(&quot;Hello, world!&quot;)  
+  &#125;,  
+  AddNumbers: function (x, y) &#123;  
+    return x + y;  
+  &#125;,  
+  Echo: function (str) &#123;  
+    var jsstr = UTF8ToString(str)  
+    var bufferSize = lengthBytesUTF8(jsstr) + 1;  
+    return stringToUTF8(jsstr, _malloc(bufferSize), bufferSize);  
+  &#125;,  
+  PrintArray: function (array, size) &#123;  
+    for(var i = 0; i &lt; size; i++)  
+        console.log(HEAPF32[(array &gt;&gt; 2) + i]);  
+  &#125;,  
+&#125;);
+</code></pre>
+<pre><code class="cs">public class WebGLBridge 
+&#123;  
+    [DllImport(&quot;__Internal&quot;)] public static extern void Hello();  
+    [DllImport(&quot;__Internal&quot;)] public static extern int Add(int x, int y);  
+    [DllImport(&quot;__Internal&quot;)] public static extern string Echo(string str);  
+    [DllImport(&quot;__Internal&quot;)] public static extern void PrintArray(float[] array, int size);  
+&#125;
+</code></pre>
+<pre><code class="html">&lt;iframe id=&quot;game&quot; 
+    src=&quot;https://www.lunareclipse.cc/Games/&quot; 
+    scrolling=&quot;no&quot; 
+    frameBorder=&quot;0&quot; 
+    allowfullscreen 
+    onload=&quot;onIframeLoaded();&quot; 
+    style=&quot;width: 100%; max-width: 100%; aspect-ratio: 16/9;&quot;&gt;
+&lt;/iframe&gt;
+
+&lt;script&gt;
+function onIframeLoaded() &#123;
+    game = document.getElementById(&quot;game&quot;);
+    unity = game.contentWindow.unity;
+&#125;
+&lt;/script&gt;
+</code></pre>
+<p>Uncaught SecurityError: Failed to read a named property “” from “”. Blocked a frame with origin from accessing a cross-origin frame.</p>
+<pre><code>
+
+
+[CORS Middleware - Hono](https://hono.dev/docs/middleware/builtin/cors)
+
+
+[Unity(WebGL)のC#とブラウザのJavaScriptの連携｜npaka](https://note.com/npaka/n/nca1e35a649e3)
+[Unity 製 WebGL ゲームを AWS でお手軽公開](https://zenn.dev/happy_elements/articles/hekk_ac_20231215)
+
+
+[GitHub - votetake/vue-unity-webgl: Unity 3d Component for VueJS](https://github.com/votetake/vue-unity-webgl)
+</code></pre>
+
+    </div>
+    
+    
+    
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
+    
+    
+    
 </div>
 
             <footer id="footer">
@@ -319,6 +361,27 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+<script>
+    console.log("gitalk path: ", decodeURI(location.pathname).substring(0, 50));
+    const gitalk = new Gitalk({
+        clientID: "1b257199da39cd021fa4",
+        clientSecret: "03478a1dd851368fe32a4eea9483c00ce041e3a2",
+        repo: "949886.github.io",
+        owner: "949886",
+        admin: "949886".split(","),
+        language: "en",
+        id: decodeURI(location.pathname),
+        
+    })
+    gitalk.render("gitalk-container");
+</script>
+
+
+
+
     
 </body>
 </html>
