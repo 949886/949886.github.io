@@ -211,7 +211,7 @@
 
 <iframe width="100%" id="game" src="https://www.lunareclipse.cc/WebGenshin/" scrolling="no" frameBorder="0" allowfullscreen style="aspect-ratio: 16/9; width: 100%;" onload="onIframeLoaded();"></iframe>
 
-<p><button type="button" onclick="unity.SendMessage('Nahida', 'Attack')">🌱</button> <button type="button" onclick="godot.changeExpression('happy')">🌑</button> <button type="button" onclick="godot.changeExpression('happy')">🌕</button></p>
+<p><button type="button" onclick="unity.instance.SendMessage('Nahida', 'Attack')">🌱</button></p>
 <h2 id="目録"><a href="#目録" class="headerlink" title="目録"></a>目録</h2><ul>
 <li><a href="#%E7%9B%AE%E9%8C%B2">目録</a></li>
 <li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB">はじめに</a></li>
@@ -280,13 +280,14 @@
 <h4 id="vue-に埋め込む"><a href="#vue-に埋め込む" class="headerlink" title="vue に埋め込む"></a>vue に埋め込む</h4><p>Unity WebGL を Vue のコンポーネントとして埋め込めたいなら、<a target="_blank" rel="noopener" href="https://github.com/votetake/vue-unity-webgl">vue-unity-webgl</a> を参照してください。</p>
 <h2 id="JavaScript-と通信"><a href="#JavaScript-と通信" class="headerlink" title="JavaScript と通信"></a>JavaScript と通信</h2><h3 id="JavaScript-側"><a href="#JavaScript-側" class="headerlink" title="JavaScript 側"></a>JavaScript 側</h3><p><strong>C# コードを呼び出す</strong></p>
 <p>JavaScript 側で C# コードを呼び出すために、Unity を代表するインスタンスをグローバルスコープに公開する必要があります。<br><code>index.html</code> で <code>createUnityInstance</code> という関数を使用して、Unity インスタンスを獲得し、<code>unity</code> という名前のグローバルオブジェクトを作成します。</p>
-<pre><code class="js">var script = document.createElement(&quot;script&quot;);
+<pre><code class="js">var unity = &#123;&#125;;
+var script = document.createElement(&quot;script&quot;);
 script.src = loaderUrl;
 script.onload = () =&gt; &#123;
   createUnityInstance(canvas, config, (progress) =&gt; &#123;
     progressBarFull.style.width = 100 * progress + &quot;%&quot;;
   &#125;).then((unityInstance) =&gt; &#123;
-    unity = unityInstance; // &lt;----
+    unity.instance = unityInstance; // &lt;----
     loadingBar.style.display = &quot;none&quot;;
   &#125;).catch((message) =&gt; &#123;
     alert(message);
@@ -294,9 +295,9 @@ script.onload = () =&gt; &#123;
 &#125;;
 </code></pre>
 <p>これで、<code>SendMessage(objectName, methodName, value)</code> 方法を使用して、どこでも C# コードを呼び出すことができます。</p>
-<pre><code class="js">unity.SendMessage(&#39;MyGameObject&#39;, &#39;MyFunction&#39;);
-unity.SendMessage(&#39;MyGameObject&#39;, &#39;MyFunction&#39;, 5);
-unity.SendMessage(&#39;MyGameObject&#39;, &#39;MyFunction&#39;, &#39;MyString&#39;);
+<pre><code class="js">unity.instance.SendMessage(&#39;MyGameObject&#39;, &#39;MyFunction&#39;);
+unity.instance.SendMessage(&#39;MyGameObject&#39;, &#39;MyFunction&#39;, 5);
+unity.instance.SendMessage(&#39;MyGameObject&#39;, &#39;MyFunction&#39;, &#39;MyString&#39;);
 </code></pre>
 <blockquote>
 <p>注意：<code>SendMessage</code> で呼び出す関数は、以下の制限があります：</p>
