@@ -206,7 +206,7 @@
     </div>
     
     <div class="content" v-pre>
-        <iframe width="100%" id="game" src="https://www.lunareclipse.cc/Games/" scrolling="no" frameBorder="0" allowfullscreen style="aspect-ratio: 16/9; width: 100%;" onload="onIframeLoaded();"></iframe>
+        <iframe width="100%" id="game" src="https://www.lunareclipse.cc/Games/Arona/" scrolling="no" frameBorder="0" allowfullscreen style="aspect-ratio: 16/9; width: 100%;" onload="onIframeLoaded();"></iframe>
 
 <p><button type="button" onclick="godot.changeExpression('normal')">🙂</button> <button type="button" onclick="godot.changeExpression('happy')">😇</button> <button type="button" onclick="godot.changeExpression('angry')">😡</button> <button type="button" onclick="godot.changeExpression('> <')">😝</button> <button type="button" onclick="godot.changeExpression('ehehe')">🤤</button> <button type="button" onclick="godot.changeExpression('o')">😯</button> <button type="button" onclick="godot.changeExpression('embarrassed')">😦</button> <button type="button" onclick="godot.changeExpression('donbiki')">😨</button> <button type="button" onclick="godot.changeExpression('sigh')">😮‍💨</button> <button type="button" onclick="godot.changeExpression('- -')">😌</button> <button type="button" onclick="godot.changeExpression('@ @')">😵‍💫</button> <button type="button" onclick="godot.changeExpression('star')">🤩</button> <button type="button" onclick="godot.changeExpression('o_o')">😱</button></p>
 <p>Emoji をクリックして、アロナちゃんの表情を変えよう！</p>
@@ -283,10 +283,10 @@ function onIframeLoaded() {
 -->
 
 <p>おまけに、Cloudflare を一緒に使用して、独自のドメインを設定することもできます。文章の長さゆえに、ここでは省略させていただきます。具体的な内容は、<a target="_blank" rel="noopener" href="https://docs.github.com/ja/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages">カスタムドメインとGitHub Pagesについて</a> と <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/registrar/get-started/register-domain/">Register a new domain · Cloudflare</a> を参照してください。</p>
-<p><a target="_blank" rel="noopener" href="https://www.lunareclipse.cc/Games/">https://www.lunareclipse.cc/Games/</a> にアクセスして、冒頭のデモをプレイできます。</p>
+<p><a target="_blank" rel="noopener" href="https://www.lunareclipse.cc/Games/Arona/">https://www.lunareclipse.cc/Games/Arona/</a> にアクセスして、冒頭のデモをプレイできます。</p>
 <h4 id="3-iframe-を使ってゲームを埋め込む"><a href="#3-iframe-を使ってゲームを埋め込む" class="headerlink" title="3. iframe を使ってゲームを埋め込む"></a>3. iframe を使ってゲームを埋め込む</h4><p>もしこのブログみたいに、ほかの Web ページにゲームを埋め込みたいなら、以下のように iframe を html コードに追加して、ゲームを埋め込むことができます。</p>
 <pre><code class="html">&lt;iframe id=&quot;game&quot; 
-    src=&quot;https://www.lunareclipse.cc/Games/&quot; 
+    src=&quot;https://www.lunareclipse.cc/Games/Arona/&quot; 
     scrolling=&quot;no&quot; 
     frameBorder=&quot;0&quot; 
     allowfullscreen 
@@ -354,12 +354,12 @@ static func remove_callback(js_name: String) -&gt; void:
 <p>これで、JavaScript 側で <code>godot.changeExpression()</code> を呼び出すと、Godot 側の <code>arona.set_expression()</code> が呼び出されます。</p>
 <pre><code class="js">godot.changeExpression(&#39;happy&#39;)
 </code></pre>
-<p><a target="_blank" rel="noopener" href="https://www.lunareclipse.cc/Games/">Game</a> ページでアドレスバーをクリックして、Ctrl+Shift+C を押して DevTools を開いて、Console に上記のコードを入力したら、Emoji をクリックすると同じようにアロナちゃんの表情が変わるはずです。</p>
+<p><a target="_blank" rel="noopener" href="https://www.lunareclipse.cc/Games/Arona/">Game</a> ページでアドレスバーをクリックして、Ctrl+Shift+C を押して DevTools を開いて、Console に上記のコードを入力したら、Emoji をクリックすると同じようにアロナちゃんの表情が変わるはずです。</p>
 <br>
 
 <h4 id="iframe-を使う場合"><a href="#iframe-を使う場合" class="headerlink" title="iframe を使う場合"></a>iframe を使う場合</h4><p>iframe を使った場合、iframe に <code>onload</code> イベントを追加して：</p>
 <pre><code class="html">&lt;iframe id=&quot;game&quot; 
-    src=&quot;https://www.lunareclipse.cc/Games/&quot; 
+    src=&quot;https://www.lunareclipse.cc/Games/Arona/&quot; 
     scrolling=&quot;no&quot; 
     frameBorder=&quot;0&quot; 
     allowfullscreen 

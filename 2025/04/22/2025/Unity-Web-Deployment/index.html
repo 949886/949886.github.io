@@ -196,7 +196,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Unity/" style="color: #03a9f4">
+                <a href="/tags/Unity/" style="color: #ffa2c4">
                     Unity
                 </a>
             </span>
@@ -294,7 +294,7 @@ script.onload = () =&gt; &#123;
   &#125;);
 &#125;;
 </code></pre>
-<p>これで、<code>SendMessage(objectName, methodName, value)</code> 方法を使用して、どこでも C# コードを呼び出すことができます。</p>
+<p>これで、<code>SendMessage(objectName, methodName, value)</code> 方法を使用して、どこでも C# コードを呼び出すことができます：</p>
 <pre><code class="js">unity.instance.SendMessage(&#39;MyGameObject&#39;, &#39;MyFunction&#39;);
 unity.instance.SendMessage(&#39;MyGameObject&#39;, &#39;MyFunction&#39;, 5);
 unity.instance.SendMessage(&#39;MyGameObject&#39;, &#39;MyFunction&#39;, &#39;MyString&#39;);
@@ -355,6 +355,11 @@ function onIframeLoaded() &#123;
 &lt;/script&gt;
 </code></pre>
 <p>こうやて、iframe が読み込まれたときに Unity 側の <code>unity</code> オブジェクトにアクセスできます。</p>
+<p><strong>iframe を全画面表示</strong></p>
+<p>先ほどの <code>game</code> 変数を使って、以下のコードで iframe を全画面表示できます。</p>
+<pre><code class="js">game.requestFullscreen();
+</code></pre>
+<p><button class="button-77" role="button" height="50px" width="50px" onclick="game.requestFullscreen();">全画面表示</button></p>
 <!-- ## StreamingAssets
 ### CORS 問題
 
