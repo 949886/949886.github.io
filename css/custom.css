@@ -48,7 +48,7 @@ iframe[title="YouTube video player"] {
   aspect-ratio: 16/9;
 }
 
-iframe#game {
+iframe#game, iframe#unity-game {
   max-width: 100%;
 }
 
