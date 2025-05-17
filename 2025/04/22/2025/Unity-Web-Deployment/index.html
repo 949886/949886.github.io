@@ -196,7 +196,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Unity/" style="color: #03a9f4">
+                <a href="/tags/Unity/" style="color: #00bcd4">
                     Unity
                 </a>
             </span>
@@ -206,7 +206,7 @@
     </div>
     
     <div class="content" v-pre>
-        <iframe width="100%" id="game" src="https://www.lunareclipse.cc/WebGenshin/" scrolling="no" frameBorder="0" allowfullscreen style="aspect-ratio: 16/9; width: 100%;" onload="onIframeLoaded2();"></iframe>
+        <iframe width="100%" id="unity-game" src="https://www.lunareclipse.cc/WebGenshin/" scrolling="no" frameBorder="0" allowfullscreen style="aspect-ratio: 16/9; width: 100%;" onload="onIframeLoaded2();"></iframe>
 
 <span id="more"></span>
 
@@ -384,7 +384,7 @@ app.use('*', cors())
 
 <script>
 function onIframeLoaded2() {
-  game = document.getElementById("game");
+  game = document.getElementById("unity-game");
   unity = game.contentWindow.unity;
 }
 </script>
