@@ -342,7 +342,7 @@ mjx-container[display="true"] + br {
         
         <span class="tag">
             
-            <a href="/tags/Unity/" style="color: #ffa2c4">Unity</a>
+            <a href="/tags/Unity/" style="color: #00bcd4">Unity</a>
         </span>
         
     </div>
@@ -390,7 +390,7 @@ function onIframeLoaded() {
         
         <span class="tag">
             
-            <a href="/tags/Godot/" style="color: #03a9f4">Godot</a>
+            <a href="/tags/Godot/" style="color: #ffa2c4">Godot</a>
         </span>
         
     </div>
@@ -969,13 +969,13 @@ FILE TAGS: Flutter
           }
 
           function setup() {
-            var visual = ABCJS.renderAbc(config.paperId, abcString, config.options || {});
+            var tunes = ABCJS.renderAbc(config.paperId, abcString, config.options || {});
             var options = config.options || {};
             var animationColors = config.animationColors;
 
             if (config.animation) {
               options.animate = Object.assign({
-                target: visual[0],
+                target: tunes[0],
                 qpm: 120,
                 listener: function (lastRange, currentRange, context) {
                   colorRange(lastRange, animationColors[0]);
@@ -985,30 +985,7 @@ FILE TAGS: Flutter
             }
             console.log(options);
             if (config.midi) {
-              if (ABCJS.synth.supportsAudio()) {
-                var controlOptions = {
-                    displayRestart: true,
-                    displayPlay: true,
-                    displayProgress: true,
-                    displayClock: true
-                };
-                var synthControl = new ABCJS.synth.SynthController();
-                synthControl.load("#abcjs-audio-1", null, controlOptions);
-                synthControl.disable(true);
-                var midiBuffer = new ABCJS.synth.CreateSynth();
-                midiBuffer.init({
-                    visualObj: visual[0],
-                    options: {
-                        
-                    }
-                }).then(function () {
-                    synthControl.setTune(visual[0], true).then(function (response) {
-                    document.querySelector(".abcjs-inline-audio").classList.remove("disabled");
-                    })
-                });
-              } else {
-                  console.log("audio is not supported on this browser");
-              };
+              ABCJS.renderMidi(config.audioId, abcString, options);
             }
           }
 
