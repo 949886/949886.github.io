@@ -328,105 +328,7 @@ mjx-container[display="true"] + br {
     <div class="description">
         <div class="content" v-pre>
             
-            <p><code>Home</code>キーはシステムのボタンであり、<code>onKeyDown</code> では検知することができません。<br>そのため、<code>Home</code>キーのイベントを検知するには、ちょっとだけトリックを使う必要があります。<br>それは、**<code>Intent.ACTION_CLOSE_SYSTEM_DIALOGS</code>** と <strong><code>BroadcastReceiver</code></strong> です。</p>
-<h3 id="Intent-ACTION-CLOSE-SYSTEM-DIALOGS"><a href="#Intent-ACTION-CLOSE-SYSTEM-DIALOGS" class="headerlink" title="Intent.ACTION_CLOSE_SYSTEM_DIALOGS"></a><code>Intent.ACTION_CLOSE_SYSTEM_DIALOGS</code></h3><p>このブロードキャストは、<strong>システムダイアログ</strong>（たとえば電源メニュー、Homeキーの押し、通知パネルのスワイプダウンなど）がシステムによって閉じられる際に送信されます。主に以下の用途で使用されます：</p>
-<ul>
-<li><strong>Homeキーの短押し</strong> を検知する</li>
-<li>システムがダイアログを閉じようとしている（例：電源ボタンの長押し）状況を検知する</li>
-<li>一部のTVシステムにおいて、リモコンに関連するメニューのクローズイベントを検知する</li>
-</ul>
-<p>まず、<code>BroadcastReceiver</code> を継承したクラスを作成して、<code>Intent.ACTION_CLOSE_SYSTEM_DIALOGS</code>を受信するようにします：</p>
-<pre><code class="kotlin">import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.util.Log
-import com.unity3d.player.UnityPlayer
-
-class SystemDialogsBroadcastReceiver : BroadcastReceiver() &#123;  
-    override fun onReceive(context: Context, intent: Intent) &#123;  
-        if (intent.action == Intent.ACTION_CLOSE_SYSTEM_DIALOGS) &#123;  
-            val reason = intent.getStringExtra(&quot;reason&quot;)  
-            when (reason) &#123;  
-                &quot;homekey&quot; -&gt; &#123; // Home button press
-                    UnityPlayer.UnitySendMessage(&quot;SceneManager&quot;, &quot;OnAndroidKeyDown&quot;, &quot;home&quot;)
-                &#125;  
-                &quot;recentapps&quot; -&gt; &#123; // Home button hold
-                    Log.d(&quot;SystemBroadcastReceiver&quot;, &quot;Recent apps button pressed&quot;)  
-                &#125;  
-            &#125;  
-        &#125;  
-    &#125;  
-&#125;
-</code></pre>
-<p>次に、<code>MainActivity</code> でこのブロードキャストレシーバーを登録します：</p>
-<pre><code class="kotlin">class MainActivity : UnityPlayerActivity() &#123;
-    private lateinit var broadcastReceiver: SystemDialogsBroadcastReceiver
-
-    override fun onCreate(savedInstanceState: Bundle?) &#123;
-        super.onCreate(savedInstanceState)
-        
-        broadcastReceiver = SystemDialogsBroadcastReceiver()
-    &#125;
-
-    override fun onResume() &#123;  
-        super.onResume()  
-        
-        val filter = IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)  
-        registerReceiver(broadcastReceiver, filter)  
-    &#125;  
-  
-    override fun onPause() &#123;  
-        super.onPause()  
-        
-        unregisterReceiver(broadcastReceiver)  
-    &#125;
-&#125;
-</code></pre>
-<p>このように、Unity の <code>SceneManager</code> オブジェクトの <code>OnAndroidKeyDown</code> メソッドが呼び出され、<code>home</code> というパラメータが渡されます。</p>
-<h3 id="Unity-側の受信"><a href="#Unity-側の受信" class="headerlink" title="Unity 側の受信"></a>Unity 側の受信</h3><p><code>BroadcastReceiver</code> のコードで Unity の <code>SceneManager</code> オブジェクトの <code>OnAndroidKeyDown</code> メソッドを呼び出していますから、Unity 側でこのメソッドを実装します：</p>
-<pre><code class="cs">// Created by LunarEclipse on 2024-7-14 10:6.
-
-using System;
-using UnityEngine;
-
-namespace USEN.Games.Common
-&#123;
-    public class RemoteControlHandler : MonoBehaviour
-    &#123;
-        public void OnAndroidKeyDown(string keyName) 
-        &#123;
-            Debug.Log($&quot;[UsenRemoteControlHandler] Key pressed: &#123;keyName&#125;&quot;);
-            UsenEvents.OnRemoconButtonClicked.Invoke(this, keyName);
-            
-            switch (keyName)
-            &#123;
-                case &quot;home&quot;:
-                    UsenEvents.OnRemoconHomeButtonClicked.Invoke(this, EventArgs.Empty);
-                    break;
-            &#125;
-        &#125;
-    &#125;
-&#125;
-</code></pre>
-<p><code>Home</code>キーを押すとき、イベント <code>OnRemoconHomeButtonClicked</code> を送信する。<br>そして、イベントをサブスクライブして、ホームボタンが押されたときのイベントを受信します。</p>
-<pre><code class="cs">namespace USEN.Games.Roulette
-&#123;
-    public class RouletteStartView : Widget
-    &#123;
-        private async void Start()
-        &#123;
-            UsenEvents.OnRemoconHomeButtonClicked += OnRemoconHomeButtonClicked;
-        &#125;
-        
-        private void OnRemoconHomeButtonClicked(object sender, EventArgs e)  
-        &#123;  
-            Application.Quit();  
-        &#125;
-    &#125;
-&#125;
-</code></pre>
-<p>これで、<code>Home</code>キーを押すと、Unity 側の <code>OnAndroidKeyDown</code> メソッドが呼び出され、プログラムを終了することができます。</p>
-
+            <p><code>Home</code>キーはシステムのボタンであり、<code>onKeyDown</code> では検知することができません。<br>そのため、<code>Home</code>キーのイベントを検知するには、ちょっとだけトリックを使う必要があります。<br>それは、 <strong><code>Intent.ACTION_CLOSE_SYSTEM_DIALOGS</code></strong> と <strong><code>BroadcastReceiver</code></strong> です。 </p>
             
         </div>
     </div>
@@ -440,12 +342,12 @@ namespace USEN.Games.Common
         
         <span class="tag">
             
-            <a href="/tags/Unity/" style="color: #00bcd4">Unity</a>
+            <a href="/tags/Unity/" style="color: #03a9f4">Unity</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Android/" style="color: #ffa2c4">Android</a>
+            <a href="/tags/Android/" style="color: #00a596">Android</a>
         </span>
         
     </div>
@@ -484,7 +386,7 @@ namespace USEN.Games.Common
         
         <span class="tag">
             
-            <a href="/tags/Unity/" style="color: #00a596">Unity</a>
+            <a href="/tags/Unity/" style="color: #ff7d73">Unity</a>
         </span>
         
     </div>
@@ -532,7 +434,7 @@ function onIframeLoaded() {
         
         <span class="tag">
             
-            <a href="/tags/Godot/" style="color: #00bcd4">Godot</a>
+            <a href="/tags/Godot/" style="color: #03a9f4">Godot</a>
         </span>
         
     </div>
@@ -826,7 +728,7 @@ FILE TAGS: Flutter
         
         <span class="tag">
             
-            <a href="/tags/Flutter/" style="color: #ff7d73">Flutter</a>
+            <a href="/tags/Flutter/" style="color: #00a596">Flutter</a>
         </span>
         
     </div>
