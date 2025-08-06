@@ -196,14 +196,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/Unity/" style="color: #00a596">
+                <a href="/tags/Unity/" style="color: #00bcd4">
                     Unity
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Android/" style="color: #00bcd4">
+                <a href="/tags/Android/" style="color: #ffa2c4">
                     Android
                 </a>
             </span>
@@ -215,11 +215,9 @@
     <div class="content" v-pre>
         <p><code>Home</code>キーはシステムのボタンであり、<code>onKeyDown</code> では検知することができません。<br>そのため、<code>Home</code>キーのイベントを検知するには、ちょっとだけトリックを使う必要があります。<br>それは、 <strong><code>Intent.ACTION_CLOSE_SYSTEM_DIALOGS</code></strong> と <strong><code>BroadcastReceiver</code></strong> です。 </p>
 <span id="more"></span>
-
 <br>
-### `Intent.ACTION_CLOSE_SYSTEM_DIALOGS`
 
-<p>このブロードキャストは、<strong>システムダイアログ</strong>（たとえば電源メニュー、Homeキーの押し、通知パネルのスワイプダウンなど）がシステムによって閉じられる際に送信されます。主に以下の用途で使用されます：</p>
+<h3 id="Intent-ACTION-CLOSE-SYSTEM-DIALOGS"><a href="#Intent-ACTION-CLOSE-SYSTEM-DIALOGS" class="headerlink" title="Intent.ACTION_CLOSE_SYSTEM_DIALOGS"></a><code>Intent.ACTION_CLOSE_SYSTEM_DIALOGS</code></h3><p>このブロードキャストは、<strong>システムダイアログ</strong>（たとえば電源メニュー、Homeキーの押し、通知パネルのスワイプダウンなど）がシステムによって閉じられる際に送信されます。主に以下の用途で使用されます：</p>
 <ul>
 <li><strong>Homeキーの短押し</strong> を検知する</li>
 <li>システムがダイアログを閉じようとしている（例：電源ボタンの長押し）状況を検知する</li>
@@ -272,7 +270,7 @@ class SystemDialogsBroadcastReceiver : BroadcastReceiver() &#123;
     &#125;
 &#125;
 </code></pre>
-<p>このように、Unity の <code>SceneManager</code> オブジェクトの <code>OnAndroidKeyDown</code> メソッドが呼び出され、<code>home</code> というパラメータが渡されます。</p>
+<p>このように、Unity の <code>SceneManager</code> オブジェクトの <code>OnAndroidKeyDown</code> メソッドが呼び出され、<code>home</code> というパラメータが渡されます。<br><br></p>
 <h3 id="Unity-側の受信"><a href="#Unity-側の受信" class="headerlink" title="Unity 側の受信"></a>Unity 側の受信</h3><p><code>BroadcastReceiver</code> のコードで Unity の <code>SceneManager</code> オブジェクトの <code>OnAndroidKeyDown</code> メソッドを呼び出していますから、Unity 側でこのメソッドを実装します：</p>
 <pre><code class="cs">// Created by LunarEclipse on 2024-7-14 10:6.
 
