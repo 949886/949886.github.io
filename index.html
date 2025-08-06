@@ -1,9 +1,9 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja,zh,en,default">
 <head>
     <meta charset="utf-8" />
-    <title>LunarEclipse&#39;s Home</title>
+    <title>LunarEclipse&#39;s Blog</title>
     <meta name="author" content="Lunar Eclipse" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -191,7 +191,7 @@ mjx-container[display="true"] + br {
         <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
     <nav id="desktop-menu">
         <a class="title" href="/">
-            <span>LUNARECLIPSE&#39;S HOME</span>
+            <span>LUNARECLIPSE&#39;S BLOG</span>
         </a>
         
         <a href="/">
@@ -223,7 +223,7 @@ mjx-container[display="true"] + br {
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
             <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;LUNARECLIPSE&#39;S HOME</span>
+            <span>&emsp;LUNARECLIPSE&#39;S BLOG</span>
         </div>
         <transition name="slide">
             <div class="items" v-show="showMenuItems">
@@ -295,7 +295,7 @@ mjx-container[display="true"] + br {
         <span class="loop"></span>
         <span class="info">
             <div class="wrap">
-                <h1>LunarEclipse&#39;s Home</h1>
+                <h1>LunarEclipse&#39;s Blog</h1>
                 <h3></h3>
                 <h5></h5>
             </div>
@@ -309,6 +309,148 @@ mjx-container[display="true"] + br {
 >
     <div id="home-posts">
         
+
+<div class="post">
+    <a href="/2025/08/06/2025/Android%20TV%20home%20button%20event/">
+        <h2 class="post-title">Android ホームボタンの検知について</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/8/6
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p><code>Home</code>キーはシステムのボタンであり、<code>onKeyDown</code> では検知することができません。<br>そのため、<code>Home</code>キーのイベントを検知するには、ちょっとだけトリックを使う必要があります。<br>それは、**<code>Intent.ACTION_CLOSE_SYSTEM_DIALOGS</code>** と <strong><code>BroadcastReceiver</code></strong> です。</p>
+<h3 id="Intent-ACTION-CLOSE-SYSTEM-DIALOGS"><a href="#Intent-ACTION-CLOSE-SYSTEM-DIALOGS" class="headerlink" title="Intent.ACTION_CLOSE_SYSTEM_DIALOGS"></a><code>Intent.ACTION_CLOSE_SYSTEM_DIALOGS</code></h3><p>このブロードキャストは、<strong>システムダイアログ</strong>（たとえば電源メニュー、Homeキーの押し、通知パネルのスワイプダウンなど）がシステムによって閉じられる際に送信されます。主に以下の用途で使用されます：</p>
+<ul>
+<li><strong>Homeキーの短押し</strong> を検知する</li>
+<li>システムがダイアログを閉じようとしている（例：電源ボタンの長押し）状況を検知する</li>
+<li>一部のTVシステムにおいて、リモコンに関連するメニューのクローズイベントを検知する</li>
+</ul>
+<p>まず、<code>BroadcastReceiver</code> を継承したクラスを作成して、<code>Intent.ACTION_CLOSE_SYSTEM_DIALOGS</code>を受信するようにします：</p>
+<pre><code class="kotlin">import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.util.Log
+import com.unity3d.player.UnityPlayer
+
+class SystemDialogsBroadcastReceiver : BroadcastReceiver() &#123;  
+    override fun onReceive(context: Context, intent: Intent) &#123;  
+        if (intent.action == Intent.ACTION_CLOSE_SYSTEM_DIALOGS) &#123;  
+            val reason = intent.getStringExtra(&quot;reason&quot;)  
+            when (reason) &#123;  
+                &quot;homekey&quot; -&gt; &#123; // Home button press
+                    UnityPlayer.UnitySendMessage(&quot;SceneManager&quot;, &quot;OnAndroidKeyDown&quot;, &quot;home&quot;)
+                &#125;  
+                &quot;recentapps&quot; -&gt; &#123; // Home button hold
+                    Log.d(&quot;SystemBroadcastReceiver&quot;, &quot;Recent apps button pressed&quot;)  
+                &#125;  
+            &#125;  
+        &#125;  
+    &#125;  
+&#125;
+</code></pre>
+<p>次に、<code>MainActivity</code> でこのブロードキャストレシーバーを登録します：</p>
+<pre><code class="kotlin">class MainActivity : UnityPlayerActivity() &#123;
+    private lateinit var broadcastReceiver: SystemDialogsBroadcastReceiver
+
+    override fun onCreate(savedInstanceState: Bundle?) &#123;
+        super.onCreate(savedInstanceState)
+        
+        broadcastReceiver = SystemDialogsBroadcastReceiver()
+    &#125;
+
+    override fun onResume() &#123;  
+        super.onResume()  
+        
+        val filter = IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)  
+        registerReceiver(broadcastReceiver, filter)  
+    &#125;  
+  
+    override fun onPause() &#123;  
+        super.onPause()  
+        
+        unregisterReceiver(broadcastReceiver)  
+    &#125;
+&#125;
+</code></pre>
+<p>このように、Unity の <code>SceneManager</code> オブジェクトの <code>OnAndroidKeyDown</code> メソッドが呼び出され、<code>home</code> というパラメータが渡されます。</p>
+<h3 id="Unity-側の受信"><a href="#Unity-側の受信" class="headerlink" title="Unity 側の受信"></a>Unity 側の受信</h3><p><code>BroadcastReceiver</code> のコードで Unity の <code>SceneManager</code> オブジェクトの <code>OnAndroidKeyDown</code> メソッドを呼び出していますから、Unity 側でこのメソッドを実装します：</p>
+<pre><code class="cs">// Created by LunarEclipse on 2024-7-14 10:6.
+
+using System;
+using UnityEngine;
+
+namespace USEN.Games.Common
+&#123;
+    public class RemoteControlHandler : MonoBehaviour
+    &#123;
+        public void OnAndroidKeyDown(string keyName) 
+        &#123;
+            Debug.Log($&quot;[UsenRemoteControlHandler] Key pressed: &#123;keyName&#125;&quot;);
+            UsenEvents.OnRemoconButtonClicked.Invoke(this, keyName);
+            
+            switch (keyName)
+            &#123;
+                case &quot;home&quot;:
+                    UsenEvents.OnRemoconHomeButtonClicked.Invoke(this, EventArgs.Empty);
+                    break;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p><code>Home</code>キーを押すとき、イベント <code>OnRemoconHomeButtonClicked</code> を送信する。<br>そして、イベントをサブスクライブして、ホームボタンが押されたときのイベントを受信します。</p>
+<pre><code class="cs">namespace USEN.Games.Roulette
+&#123;
+    public class RouletteStartView : Widget
+    &#123;
+        private async void Start()
+        &#123;
+            UsenEvents.OnRemoconHomeButtonClicked += OnRemoconHomeButtonClicked;
+        &#125;
+        
+        private void OnRemoconHomeButtonClicked(object sender, EventArgs e)  
+        &#123;  
+            Application.Quit();  
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>これで、<code>Home</code>キーを押すと、Unity 側の <code>OnAndroidKeyDown</code> メソッドが呼び出され、プログラムを終了することができます。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Unity/" style="color: #00bcd4">Unity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Android/" style="color: #ffa2c4">Android</a>
+        </span>
+        
+    </div>
+    <a href="/2025/08/06/2025/Android%20TV%20home%20button%20event/" class="go-post">阅读全文</a>
+</div>
 
 <div class="post">
     <a href="/2025/04/22/2025/Unity-Web-Deployment/">
@@ -390,7 +532,7 @@ function onIframeLoaded() {
         
         <span class="tag">
             
-            <a href="/tags/Godot/" style="color: #00a596">Godot</a>
+            <a href="/tags/Godot/" style="color: #00bcd4">Godot</a>
         </span>
         
     </div>
@@ -684,7 +826,7 @@ FILE TAGS: Flutter
         
         <span class="tag">
             
-            <a href="/tags/Flutter/" style="color: #00a596">Flutter</a>
+            <a href="/tags/Flutter/" style="color: #ff7d73">Flutter</a>
         </span>
         
     </div>
@@ -1095,7 +1237,7 @@ var jsonTextFile = Resources.Load&lt;TextAsset&gt;("Text/jsonFile01").ToString()
             </span>
             
             <span class="icon-link">
-                <a target="_blank" rel="noopener" href="https://x.com/sora_mochizuk">
+                <a target="_blank" rel="noopener" href="https://x.com/LunarEclipseOvO">
                     <i
                         class="fa-brands fa-x-twitter fa-fw"
                     ></i>
@@ -1132,7 +1274,7 @@ var jsonTextFile = Resources.Load&lt;TextAsset&gt;("Text/jsonFile01").ToString()
     <div id="footer-wrap">
         <div>
             &copy;
-            2022 - 2025 LunarEclipse&#39;s Home
+            2022 - 2025 LunarEclipse&#39;s Blog
             <span id="footer-icon">
                 <i class="fa-solid fa-font-awesome fa-fw"></i>
             </span>

@@ -2,9 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://949886.github.io/2025/08/06/2025/Android%20TV%20home%20button%20event/</loc>
+    
+    <lastmod>2025-08-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://949886.github.io/2025/04/07/2025/Game%20Web%20Deployment/</loc>
+    
+    <lastmod>2025-08-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://949886.github.io/2025/04/22/2025/Unity-Web-Deployment/</loc>
     
-    <lastmod>2025-05-17</lastmod>
+    <lastmod>2025-08-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -21,15 +39,6 @@
   
   <url>
     <loc>https://949886.github.io/2024/05/02/2024/GLSL%20Loading%20Shaders%20in%20Flutter/</loc>
-    
-    <lastmod>2025-05-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://949886.github.io/2025/04/07/2025/Game%20Web%20Deployment/</loc>
     
     <lastmod>2025-05-17</lastmod>
     
@@ -139,7 +148,7 @@
 
   <url>
     <loc>https://949886.github.io/</loc>
-    <lastmod>2025-05-17</lastmod>
+    <lastmod>2025-08-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -147,21 +156,28 @@
   
   <url>
     <loc>https://949886.github.io/tags/Flutter/</loc>
-    <lastmod>2025-05-17</lastmod>
+    <lastmod>2025-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://949886.github.io/tags/Unity/</loc>
-    <lastmod>2025-05-17</lastmod>
+    <lastmod>2025-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://949886.github.io/tags/Godot/</loc>
-    <lastmod>2025-05-17</lastmod>
+    <lastmod>2025-08-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://949886.github.io/tags/Android/</loc>
+    <lastmod>2025-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
